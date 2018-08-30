@@ -100,7 +100,9 @@ public final class SwtGameWindow {
         this.window.setBackground(be.yildizgames.module.color.Color.rgb(100,0,0));
         this.window.setBackground(this.loadingBackground);
         this.canvas = window.createCanvas(window.getWidth(), window.getHeight());
-      //  this.window.getShell().setLayout(new FillLayout());
+        if(fullScreenMode) {
+            this.window.getShell().setLayout(new FillLayout());
+        }
     }
 
     /**

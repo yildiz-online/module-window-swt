@@ -31,8 +31,10 @@ import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.input.WindowInputListener;
 import be.yildizgames.module.window.swt.input.SwtGameWindowKeyListener;
 import be.yildizgames.module.window.swt.input.SwtGameWindowMouseListener;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,7 +71,11 @@ public final class SwtWindowEngine implements WindowEngine {
     public SwtWindowEngine(boolean fullScreen) {
         super();
         System.setProperty("SWT_GTK3", "0");
-        this.window = new SwtWindow();
+        if(fullScreen) {
+            this.window = new SwtWindow(new Shell(SWT.NONE));
+        } else {
+            this.window = new SwtWindow();
+        }
         this.gameWindow.initialize(this.window, fullScreen);
         this.hideCursor();
         this.window.execute(this.window::open);
