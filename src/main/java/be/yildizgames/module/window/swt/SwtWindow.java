@@ -307,4 +307,8 @@ public final class SwtWindow {
     void setCursor(Cursor cursor) {
         this.shell.setCursor(cursor);
     }
+
+    public void onClose(Listener l) {
+        this.shell.addListener(SWT.CLOSE, l);
+    }
 }
