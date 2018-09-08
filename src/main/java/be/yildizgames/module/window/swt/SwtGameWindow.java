@@ -24,6 +24,7 @@
 
 package be.yildizgames.module.window.swt;
 
+import be.yildizgames.module.coordinate.Coordinates;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
@@ -79,7 +80,7 @@ public final class SwtGameWindow {
      *
      * @param window Window to use as container.
      */
-    public void initialize(final SwtWindow window, boolean fullScreenMode) {
+    public void initialize(final SwtWindow window, boolean fullScreenMode, Coordinates c) {
         this.window = window;
         this.window.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
 
@@ -97,9 +98,9 @@ public final class SwtGameWindow {
         this.loadingBackground = new Image(this.window.getShell().getDisplay(), tmpImage.getImageData().scaledTo(this.window.getShell().getBounds().width, this.window.getShell().getBounds().height));
         this.currentCursor = this.window.getCursor();
         this.window.setCursor(this.invisibleCursor);
-        this.window.setBackground(be.yildizgames.module.color.Color.rgb(100,0,0));
         this.window.setBackground(this.loadingBackground);
-        this.canvas = window.createCanvas(window.getWidth(), window.getHeight());
+        this.canvas = window.createCanvas(c.width, c.height);
+        this.canvas.setLocation(c.left, c.top);
         if(fullScreenMode) {
             this.window.getShell().setLayout(new FillLayout());
         }

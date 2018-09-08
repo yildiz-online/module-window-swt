@@ -24,6 +24,7 @@
 
 package be.yildizgames.module.window.swt;
 
+import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.WindowEngine;
@@ -62,13 +63,17 @@ public final class SwtWindowEngine implements WindowEngine {
      * Simple constructor.
      */
     SwtWindowEngine() {
-        this(true);
+        System.setProperty("SWT_GTK3", "0");
+        this.window = new SwtWindow(new Shell(SWT.NONE));
+        this.gameWindow.initialize(this.window, true, new Coordinates(window.getWidth(), window.getHeight(), 0, 0));
+        this.hideCursor();
+        this.window.execute(this.window::open);
     }
 
     /**
      * Simple constructor.
      */
-    public SwtWindowEngine(boolean fullScreen) {
+    public SwtWindowEngine(boolean fullScreen, Coordinates c) {
         super();
         System.setProperty("SWT_GTK3", "0");
         if(fullScreen) {
@@ -76,7 +81,7 @@ public final class SwtWindowEngine implements WindowEngine {
         } else {
             this.window = new SwtWindow();
         }
-        this.gameWindow.initialize(this.window, fullScreen);
+        this.gameWindow.initialize(this.window, fullScreen, c);
         this.hideCursor();
         this.window.execute(this.window::open);
     }
@@ -84,14 +89,15 @@ public final class SwtWindowEngine implements WindowEngine {
     /**
      * Simple constructor.
      */
-    public SwtWindowEngine(SwtWindow window, boolean fullScreen) {
+    public SwtWindowEngine(SwtWindow window, Coordinates c) {
         super();
         System.setProperty("SWT_GTK3", "0");
         this.window = window;
-        this.gameWindow.initialize(this.window, fullScreen);
+        this.gameWindow.initialize(this.window, false, c);
         this.hideCursor();
         this.window.execute(this.window::open);
     }
+
 
     @Override
     public final void setWindowTitle(final String title) {

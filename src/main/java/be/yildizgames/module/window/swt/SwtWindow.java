@@ -48,7 +48,6 @@ import org.eclipse.swt.widgets.TreeItem;
 
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Grégory Van den Borre
@@ -113,17 +112,6 @@ public final class SwtWindow {
         this.shell.setBackgroundImage(background);
     }
 
-    /**
-     * Set the background color.
-     * @deprecated use setBackground instead
-     *
-     * @param background color to set as background.
-     */
-    @Deprecated
-    public void setBackgroundColor(final Color background) {
-        this.setBackground(background);
-    }
-
     public void setWindowIcon(final String file) {
         this.shell.setImage(this.getImage(file));
     }
@@ -152,6 +140,7 @@ public final class SwtWindow {
             TreeItem item = new TreeItem(tree, 0);
             item.setText(element.title);
             element.getChildren().forEach(e -> generate(item, e));
+            item.setExpanded(true);
         }
         tree.setEnabled(true);
         return tree;
@@ -163,6 +152,7 @@ public final class SwtWindow {
         for(TreeElement e : element.getChildren()) {
             generate(item, e);
         }
+        item.setExpanded(true);
     }
 
     public Label createLabel(final String text, final SwtWindowUtils.ColorValue color, final Font font) {
@@ -252,18 +242,18 @@ public final class SwtWindow {
         Menu menu = new Menu(this.shell, SWT.BAR);
         this.shell.setMenuBar(menu);
         for(MenuBarElement e : barElements) {
-            this.createMenu(menu, e.title, e.getChildren());
+            this.createMenu(menu, e);
         }
-
+        menu.setVisible(true);
         return menu;
     }
 
-    private void createMenu(Menu menu, String titleText, List<MenuElement> elements) {
+    private void createMenu(Menu menu, MenuBarElement e) {
         MenuItem title = new MenuItem(menu, SWT.CASCADE);
-        title.setText("&" + titleText);
+        title.setText("&" + e.title);
         Menu sub = new Menu(this.shell, SWT.DROP_DOWN);
         title.setMenu(sub);
-        elements.forEach(elmt -> createMenuElement(sub, elmt));
+        e.getChildren().forEach(elmt -> createMenuElement(sub, elmt));
     }
 
     private static void createMenuElement(Menu parent, MenuElement e) {
