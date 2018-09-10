@@ -63,7 +63,8 @@ public final class SwtWindowEngine implements WindowEngine {
      * Simple constructor.
      */
     SwtWindowEngine() {
-        System.setProperty("SWT_GTK3", "0");
+        super();
+        setGtk();
         this.window = new SwtWindow(new Shell(SWT.NONE));
         this.gameWindow.initialize(this.window, true, new Coordinates(window.getWidth(), window.getHeight(), 0, 0));
         this.hideCursor();
@@ -75,7 +76,7 @@ public final class SwtWindowEngine implements WindowEngine {
      */
     public SwtWindowEngine(boolean fullScreen, Coordinates c) {
         super();
-        System.setProperty("SWT_GTK3", "0");
+        setGtk();
         if(fullScreen) {
             this.window = new SwtWindow(new Shell(SWT.NONE));
         } else {
@@ -91,11 +92,15 @@ public final class SwtWindowEngine implements WindowEngine {
      */
     public SwtWindowEngine(SwtWindow window, Coordinates c) {
         super();
-        System.setProperty("SWT_GTK3", "0");
+        setGtk();
         this.window = window;
         this.gameWindow.initialize(this.window, false, c);
         this.hideCursor();
         this.window.execute(this.window::open);
+    }
+
+    private static void setGtk() {
+        System.setProperty("SWT_GTK3", "0");
     }
 
 

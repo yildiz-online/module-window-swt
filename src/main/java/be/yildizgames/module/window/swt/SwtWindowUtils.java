@@ -34,23 +34,18 @@ public class SwtWindowUtils {
                 bh.hover = true;
             }
         });
-        b.addPaintListener(new PaintListener() {
-
-            @Override
-            public void paintControl(final PaintEvent e) {
-                GC gcBack = new GC(background);
-                gcBack.setAntialias(SWT.ON);
-                gcBack.setBackground(bh.hover ? h : c);
-                gcBack.setAlpha(255);
-                gcBack.fillRectangle(0, 0, b.getBounds().width, b.getBounds().height);
-                gcBack.setForeground(t);
-                gcBack.setFont(font);
-                gcBack.drawText(text, 40, 8, true);
-                gcBack.setAlpha(255);
-                e.gc.drawImage(background, 0, 0);
-                gcBack.dispose();
-            }
-
+        b.addPaintListener(e -> {
+            GC gcBack = new GC(background);
+            gcBack.setAntialias(SWT.ON);
+            gcBack.setBackground(bh.hover ? h : c);
+            gcBack.setAlpha(255);
+            gcBack.fillRectangle(0, 0, b.getBounds().width, b.getBounds().height);
+            gcBack.setForeground(t);
+            gcBack.setFont(font);
+            gcBack.drawText(text, 40, 8, true);
+            gcBack.setAlpha(255);
+            e.gc.drawImage(background, 0, 0);
+            gcBack.dispose();
         });
     }
 
