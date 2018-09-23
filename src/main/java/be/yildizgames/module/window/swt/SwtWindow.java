@@ -43,8 +43,6 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Tree;
-import org.eclipse.swt.widgets.TreeItem;
 
 import java.io.InputStream;
 import java.util.Arrays;
@@ -132,27 +130,8 @@ public final class SwtWindow {
         return button;
     }
 
-    public Tree createTree(int w, int h, TreeElement... elements) {
-        Tree tree = new Tree(this.shell, SWT.NONE);
-        tree.setSize(w, h);
-        tree.setBackground(this.shell.getBackground());
-        for(TreeElement element : elements) {
-            TreeItem item = new TreeItem(tree, 0);
-            item.setText(element.title);
-            element.getChildren().forEach(e -> generate(item, e));
-            item.setExpanded(true);
-        }
-        tree.setEnabled(true);
-        return tree;
-    }
-
-    private static void generate(TreeItem parent, TreeElement element) {
-        TreeItem item = new TreeItem(parent, 0);
-        item.setText(element.title);
-        for(TreeElement e : element.getChildren()) {
-            generate(item, e);
-        }
-        item.setExpanded(true);
+    public TreeRoot createTree(int w, int h, TreeElement... elements) {
+        return TreeRoot.create(this.shell, w, h, elements);
     }
 
     public Label createLabel(final String text, final SwtWindowUtils.ColorValue color, final Font font) {

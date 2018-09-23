@@ -6,12 +6,15 @@ import java.util.List;
 
 public class TreeElement {
 
+    final int id;
+
     final String title;
 
     private final List<TreeElement> children;
 
-    public TreeElement(String title, TreeElement... elements) {
+    public TreeElement(int id, String title, TreeElement... elements) {
         super();
+        this.id = id;
         this.title = title;
         if(elements == null) {
             children = Collections.emptyList();
