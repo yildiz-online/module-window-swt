@@ -26,12 +26,15 @@ package be.yildizgames.module.window.swt;
 
 public class MenuElement {
 
+    final int id;
+
     final String title;
 
     final SelectionBehavior behavior;
 
-    public MenuElement(String title, SelectionBehavior behavior) {
+    public MenuElement(int id, String title, SelectionBehavior behavior) {
         super();
+        this.id = id;
         this.title = title;
         this.behavior = behavior;
     }

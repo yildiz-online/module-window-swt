@@ -38,8 +38,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -217,28 +215,8 @@ public final class SwtWindow {
         return new Label(this.shell, SWT.NONE);
     }
 
-    public Menu createMenuBar(MenuBarElement... barElements) {
-        Menu menu = new Menu(this.shell, SWT.BAR);
-        this.shell.setMenuBar(menu);
-        for(MenuBarElement e : barElements) {
-            this.createMenu(menu, e);
-        }
-        menu.setVisible(true);
-        return menu;
-    }
-
-    private void createMenu(Menu menu, MenuBarElement e) {
-        MenuItem title = new MenuItem(menu, SWT.CASCADE);
-        title.setText("&" + e.title);
-        Menu sub = new Menu(this.shell, SWT.DROP_DOWN);
-        title.setMenu(sub);
-        e.getChildren().forEach(elmt -> createMenuElement(sub, elmt));
-    }
-
-    private static void createMenuElement(Menu parent, MenuElement e) {
-        MenuItem p = new MenuItem(parent, SWT.PUSH);
-        p.setText("&" + e.title);
-        p.addSelectionListener(e.behavior);
+    public SwtMenuBar createMenuBar(MenuBarElement... barElements) {
+        return new SwtMenuBar(this.shell, barElements);
     }
 
     public FileDialog createOpenFileDialog(String title) {
