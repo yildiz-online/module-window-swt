@@ -25,7 +25,7 @@
 
 package be.yildizgames.module.window.swt;
 
-import be.yildizgames.module.window.WindowEngine;
+import be.yildizgames.module.window.BaseWindowEngine;
 import be.yildizgames.module.window.WindowEngineProvider;
 
 /**
@@ -34,7 +34,7 @@ import be.yildizgames.module.window.WindowEngineProvider;
 public class SwtWindowEngineProvider implements WindowEngineProvider {
 
     @Override
-    public WindowEngine getEngine() {
+    public BaseWindowEngine getEngine() {
         return new SwtWindowEngine();
     }
 }

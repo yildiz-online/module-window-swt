@@ -25,9 +25,9 @@
 package be.yildizgames.module.window.swt;
 
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.window.BaseWindowEngine;
 import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
-import be.yildizgames.module.window.WindowEngine;
 import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.input.WindowInputListener;
 import be.yildizgames.module.window.swt.input.SwtGameWindowKeyListener;
@@ -45,7 +45,7 @@ import java.util.Map;
  *
  * @author Grégory Van den Borre
  */
-public final class SwtWindowEngine implements WindowEngine {
+public final class SwtWindowEngine implements BaseWindowEngine {
 
     /**
      * SWT game window.
@@ -115,9 +115,10 @@ public final class SwtWindowEngine implements WindowEngine {
     }
 
     @Override
-    public final void createCursor(final Cursor cursor) {
+    public final Cursor createCursor(final Cursor cursor) {
         final Image data = this.window.getImage(cursor.getPath());
         this.cursorList.put(cursor, new org.eclipse.swt.graphics.Cursor(Display.getCurrent(), data.getImageData(), cursor.getX(), cursor.getY()));
+        return cursor;
     }
 
     @Override
