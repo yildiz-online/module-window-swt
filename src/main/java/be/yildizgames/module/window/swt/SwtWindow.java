@@ -24,7 +24,7 @@
 
 package be.yildizgames.module.window.swt;
 
-import be.yildizgames.common.exception.technical.ResourceMissingException;
+import be.yildizgames.common.file.exception.FileMissingException;
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.window.ScreenSize;
 import org.eclipse.swt.SWT;
@@ -149,7 +149,7 @@ public final class SwtWindow {
     Image getImage(final String path) {
         InputStream is = this.getClass().getClassLoader().getResourceAsStream(path);
         if (is == null) {
-            throw new ResourceMissingException("Cannot find image " + path);
+            throw new FileMissingException("Cannot find image " + path);
         }
         return new Image(this.shell.getDisplay(), is);
     }
