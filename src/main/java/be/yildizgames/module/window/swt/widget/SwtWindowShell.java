@@ -26,13 +26,13 @@
 
 package be.yildizgames.module.window.swt.widget;
 
-import be.yildizgames.launcher.client.view.lib.WindowDropdown;
-import be.yildizgames.launcher.client.view.lib.WindowImage;
-import be.yildizgames.launcher.client.view.lib.WindowTextArea;
-import be.yildizgames.launcher.client.view.lib.WindowTextButton;
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.window.widget.WindowDropdown;
+import be.yildizgames.module.window.widget.WindowImage;
 import be.yildizgames.module.window.widget.WindowShell;
+import be.yildizgames.module.window.widget.WindowTextArea;
+import be.yildizgames.module.window.widget.WindowTextButton;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
