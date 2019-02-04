@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
 public class SwtGameWindowKeyListenerTest {
 
     @Test
-    void testPressChar() {
+    public void testPressChar() {
         ListenerTest lt = new ListenerTest();
         SwtGameWindowKeyListener l = SwtGameWindowKeyListener.create(lt);
         l.keyPressedImpl(65, 'A');
@@ -43,7 +43,7 @@ public class SwtGameWindowKeyListenerTest {
     }
 
     @Test
-    void testPressEnter() {
+    public void testPressEnter() {
         ListenerTest lt = new ListenerTest();
         SwtGameWindowKeyListener l = SwtGameWindowKeyListener.create(lt);
         l.keyPressedImpl(13, '\0');
@@ -51,7 +51,7 @@ public class SwtGameWindowKeyListenerTest {
     }
 
     @Test
-    void testPressArrow() {
+    public void testPressArrow() {
         ListenerTest lt = new ListenerTest();
         SwtGameWindowKeyListener l = SwtGameWindowKeyListener.create(lt);
         l.keyPressedImpl(16777219, '\0');
@@ -59,7 +59,7 @@ public class SwtGameWindowKeyListenerTest {
     }
 
     @Test
-    void testPressNumber() {
+    public void testPressNumber() {
         ListenerTest lt = new ListenerTest();
         SwtGameWindowKeyListener l = SwtGameWindowKeyListener.create(lt);
         l.keyPressedImpl(16777264, '\0');
@@ -67,7 +67,7 @@ public class SwtGameWindowKeyListenerTest {
     }
 
     @Test
-    void testReleaseChar() {
+    public void testReleaseChar() {
         ListenerTest lt = new ListenerTest();
         SwtGameWindowKeyListener l = SwtGameWindowKeyListener.create(lt);
         l.keyReleasedImpl(65, 'A');
@@ -75,7 +75,7 @@ public class SwtGameWindowKeyListenerTest {
     }
 
     @Test
-    void testReleaseEnter() {
+    public void testReleaseEnter() {
         ListenerTest lt = new ListenerTest();
         SwtGameWindowKeyListener l = SwtGameWindowKeyListener.create(lt);
         l.keyReleasedImpl(13, '\0');

@@ -33,16 +33,16 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Grégory Van den Borre
  */
-class SwtKeyValueTest {
+public class SwtKeyValueTest {
 
     @Nested
-    class GetKey {
+    public class GetKey {
 
         /**
          * Test all possible matches for a SWT key and an engine key.
          */
         @Test
-        void map() {
+        public void map() {
             SwtKeyValue v = new SwtKeyValue();
             Assertions.assertEquals(Key.ALT, v.getKey(SWT.ALT));
             Assertions.assertEquals(Key.SHIFT, v.getKey(SWT.SHIFT));
