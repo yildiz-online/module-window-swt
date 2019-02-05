@@ -26,22 +26,6 @@
 
 package be.yildizgames.module.window.swt.widget;
 
-import be.yildizgames.module.window.ScreenSize;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-
 public class SwtWindowShellTest {
-
-    @Nested
-    public class Constructor {
-
-        @Test
-        public void noCloseHappyFlow() {
-            SwtWindowShell shell = SwtWindowShell.noClose();
-            Assertions.assertNotNull(shell);
-            Assertions.assertEquals(new ScreenSize(0,0), shell.getScreenSize());
-        }
-    }
 
 }
