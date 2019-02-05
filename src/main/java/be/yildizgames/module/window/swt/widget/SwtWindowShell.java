@@ -28,23 +28,35 @@ package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.window.Cursor;
+import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.widget.WindowDropdown;
 import be.yildizgames.module.window.widget.WindowImage;
 import be.yildizgames.module.window.widget.WindowShell;
 import be.yildizgames.module.window.widget.WindowTextArea;
 import be.yildizgames.module.window.widget.WindowTextButton;
+import be.yildizgames.module.window.widget.WindowTreeElement;
+import be.yildizgames.module.window.widget.WindowTreeRoot;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SwtWindowShell implements WindowShell {
 
@@ -52,12 +64,46 @@ public class SwtWindowShell implements WindowShell {
 
     private final SwtImageProvider imageProvider;
 
+    private final Map<Cursor, SwtWindowCursor> cursorList = new HashMap<>();
+
+    private Cursor currentCursor;
+
+    /**
+     * Invisible cursor.
+     */
+    private final Cursor invisibleCursor;
+
     private SwtWindowShell(final Shell shell, SwtImageProvider imageProvider) {
         super();
         this.imageProvider = imageProvider;
         this.shell = shell;
         this.shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
+        final PaletteData palette = new PaletteData(
+                this.shell.getDisplay().getSystemColor(SWT.COLOR_WHITE).getRGB(),
+                this.shell.getDisplay().getSystemColor(SWT.COLOR_BLACK).getRGB());
+        final ImageData sourceData = new ImageData(16, 16, 1, palette);
+        sourceData.transparentPixel = 0;
+        this.invisibleCursor = new Cursor("Empty", "", 0, 0);
+        this.cursorList.put(this.invisibleCursor, new SwtWindowCursor(sourceData, 0, 0));
+    }
 
+    public static SwtWindowShell noClose() {
+        return noClose(new ClasspathImageProvider());
+    }
+
+    public static SwtWindowShell noClose(SwtImageProvider imageProvider) {
+        return new SwtWindowShell(new Shell(Display.getCurrent(), SWT.NO_TRIM | SWT.TRANSPARENT), imageProvider);
+    }
+
+    public static SwtWindowShell withClose() {
+        return withClose(new ClasspathImageProvider());
+    }
+
+    public static SwtWindowShell withClose(SwtImageProvider imageProvider) {
+        return new SwtWindowShell(new Shell(Display.getCurrent(), SWT.CLOSE | SWT.TRANSPARENT), imageProvider);
+    }
+
+    public final void setMovable() {
         Listener l = new Listener() {
             Point origin;
 
@@ -84,15 +130,6 @@ public class SwtWindowShell implements WindowShell {
         this.shell.addListener(SWT.MouseDown, l);
         this.shell.addListener(SWT.MouseUp, l);
         this.shell.addListener(SWT.MouseMove, l);
-        this.shell.open();
-    }
-
-    public static SwtWindowShell noClose(SwtImageProvider imageProvider) {
-        return new SwtWindowShell(new Shell(Display.getCurrent(), SWT.NO_TRIM | SWT.TRANSPARENT), imageProvider);
-    }
-
-    public static SwtWindowShell withClose(SwtImageProvider imageProvider) {
-        return new SwtWindowShell(new Shell(Display.getCurrent(), SWT.CLOSE | SWT.TRANSPARENT), imageProvider);
     }
 
     @Override
@@ -102,8 +139,8 @@ public class SwtWindowShell implements WindowShell {
 
     @Override
     public SwtWindowShell setTitle(String text) {
-        this.shell.setText("Yildiz update manager");
-        Display.setAppName("Yildiz update manager");
+        this.shell.setText(text);
+        Display.setAppName(text);
         return this;
     }
 
@@ -136,12 +173,12 @@ public class SwtWindowShell implements WindowShell {
     }
 
     @Override
-    public SwtWindowButton createNativeButton() {
+    public SwtWindowButton createButton() {
         return new SwtWindowButton(new Button(this.shell, SWT.SMOOTH));
     }
 
     @Override
-    public final SwtWindowText createNativeTextLine() {
+    public final SwtWindowText createTextLine() {
         Label l = new Label(this.shell, SWT.SMOOTH);
         return new SwtWindowText(l);
     }
@@ -176,18 +213,17 @@ public class SwtWindowShell implements WindowShell {
     }
 
     @Override
-    public int getWidth() {
-        return this.shell.getBounds().width;
-    }
-
-    @Override
-    public int getHeight() {
-        return this.shell.getBounds().height;
-    }
-
-    @Override
-    public WindowShell setBackground(Color color) {
+    public final WindowShell setBackground(Color color) {
         this.shell.setBackground(SwtConverter.from(color));
+        return this;
+    }
+
+    @Override
+    public final WindowShell setBackground(String background) {
+        this.shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
+        Image tmpImage = this.imageProvider.getImage(this.shell, background);
+        Image backgroundImage = new Image(this.shell.getDisplay(), tmpImage.getImageData().scaledTo(this.shell.getBounds().width, this.shell.getBounds().height));
+        this.shell.setBackgroundImage(backgroundImage);
         return this;
     }
 
@@ -204,12 +240,80 @@ public class SwtWindowShell implements WindowShell {
     }
 
     @Override
-    public WindowDropdown createNativeDropdown() {
+    public final WindowTreeRoot createTreeRoot(int height, int width, WindowTreeElement... elements) {
+        return SwtWindowTreeRoot.create(this.shell, height, width, elements);
+    }
+
+    @Override
+    public WindowDropdown createDropdown() {
         return new SwtWindowDropdown(new Combo(this.shell,  SWT.DROP_DOWN | SWT.READ_ONLY));
     }
 
     @Override
-    public WindowTextButton createNativeTextButton() {
+    public WindowTextButton createTextButton() {
         return new SwtWindowTextButton(new Button(this.shell, SWT.SMOOTH));
+    }
+
+    /**
+     * Make the window use all the screen and remove the title bar.
+     */
+    @Override
+    public final WindowShell setFullScreen() {
+        this.shell.setFullScreen(true);
+        this.shell.setFocus();
+        final Monitor m = Display.getDefault().getPrimaryMonitor();
+        this.shell.setBounds(-1, -1, m.getBounds().width + 2, m.getBounds().height + 2);
+        this.shell.setLayout(new FillLayout());
+        return this;
+    }
+
+    @Override
+    public final ScreenSize getScreenSize() {
+        return new ScreenSize(this.shell.getBounds().width, this.shell.getBounds().height);
+    }
+
+    @Override
+    public void checkForEvent() {
+        this.shell.getDisplay().readAndDispatch();
+    }
+
+    public final void execute(final Runnable r) {
+        this.shell.getDisplay().syncExec(r);
+    }
+
+    @Override
+    public final void open() {
+        this.shell.open();
+    }
+
+    public Cursor createCursor(Cursor cursor) {
+        final Image image = this.imageProvider.getImage(this.shell, cursor.getPath());
+        this.cursorList.put(cursor, new SwtWindowCursor(image.getImageData(), cursor.getX(), cursor.getY()));
+        return cursor;
+    }
+
+    public void setCursor(Cursor cursor) {
+        this.currentCursor = cursor;
+        this.cursorList.get(cursor).activate(this.shell);
+    }
+
+    /**
+     * Set the mouse cursor visible.
+     */
+    public void showCursor() {
+        this.setCursor(this.currentCursor);
+    }
+
+    /**
+     * Set the mouse cursor invisible.
+     */
+    public void hideCursor() {
+        this.setCursor(this.invisibleCursor);
+    }
+
+    public SwtWindowCanvas createCanvas(Coordinates coordinates) {
+        Canvas canvas = new Canvas(shell, SWT.NONE);
+        canvas.setBounds(coordinates.left, coordinates.top, coordinates.width, coordinates.height);
+        return new SwtWindowCanvas(canvas);
     }
 }

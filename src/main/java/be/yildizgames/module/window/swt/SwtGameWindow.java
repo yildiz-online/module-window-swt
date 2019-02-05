@@ -25,48 +25,27 @@
 package be.yildizgames.module.window.swt;
 
 import be.yildizgames.module.coordinate.Coordinates;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Cursor;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.PaletteData;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Canvas;
+import be.yildizgames.module.window.swt.widget.SwtWindowCanvas;
+import be.yildizgames.module.window.swt.widget.SwtWindowShell;
 
 /**
  * Game main rendering window.
  *
  * @author Grégory Van den Borre
+ * @deprecated Move to engine client (ui addon?)
  */
+@Deprecated(since = "now", forRemoval = true)
 public final class SwtGameWindow {
-
-
 
     /**
      * The SWT shell.
      */
-    private SwtWindow window;
+    private SwtWindowShell window;
 
     /**
      * Canvas for the window and the 3d context.
      */
-    private Canvas canvas;
-
-    /**
-     * Image to use when the engine is loading.
-     */
-    private Image loadingBackground;
-
-    /**
-     * Cursor currently used.
-     */
-    private Cursor currentCursor;
-
-    /**
-     * Invisible cursor.
-     */
-    private Cursor invisibleCursor;
+    private SwtWindowCanvas canvas;
 
     /**
      * Constructor.
@@ -80,67 +59,20 @@ public final class SwtGameWindow {
      *
      * @param window Window to use as container.
      */
-    public void initialize(final SwtWindow window, boolean fullScreenMode, Coordinates c) {
+    public void initialize(final SwtWindowShell window, boolean fullScreenMode, Coordinates c) {
         this.window = window;
-        this.window.getShell().setBackgroundMode(SWT.INHERIT_DEFAULT);
-
-        final Color white = this.window.getSystemColor(SWT.COLOR_WHITE);
-        final Color black = this.window.getSystemColor(SWT.COLOR_BLACK);
-        final PaletteData palette = new PaletteData(white.getRGB(), black.getRGB());
-        final ImageData sourceData = new ImageData(16, 16, 1, palette);
-        sourceData.transparentPixel = 0;
-        this.invisibleCursor = new Cursor(window.getShell().getDisplay(), sourceData, 0, 0);
         if (fullScreenMode) {
             this.window.setFullScreen();
         }
-        Image tmpImage = this.window.getImage("engine.png");
-
-        this.loadingBackground = new Image(this.window.getShell().getDisplay(), tmpImage.getImageData().scaledTo(this.window.getShell().getBounds().width, this.window.getShell().getBounds().height));
-        this.currentCursor = this.window.getCursor();
-        this.window.setCursor(this.invisibleCursor);
-        this.window.setBackground(this.loadingBackground);
-        this.canvas = window.createCanvas(c.width, c.height);
-        this.canvas.setLocation(c.left, c.top);
-        if(fullScreenMode) {
-            this.window.getShell().setLayout(new FillLayout());
-        }
-    }
-
-    /**
-     * Use a new cursor in the window.
-     *
-     * @param cursor Cursor to use.
-     */
-    void setCursor(final Cursor cursor) {
-        this.currentCursor = cursor;
-        this.window.setCursor(this.currentCursor);
+        this.window.hideCursor();
+        this.window.setBackground("engine.png");
+        this.canvas = window.createCanvas(c);
     }
 
     /**
      * @return The SWT canvas.
      */
-    public Canvas getCanvas() {
+    public SwtWindowCanvas getCanvas() {
         return this.canvas;
-    }
-
-    /**
-     * Remove resources used during loading.
-     */
-    void deleteLoadingResources() {
-        this.loadingBackground.dispose();
-    }
-
-    /**
-     * Set the mouse cursor visible.
-     */
-    public void showCursor() {
-        this.window.setCursor(this.currentCursor);
-    }
-
-    /**
-     * Set the mouse cursor invisible.
-     */
-    void hideCursor() {
-        this.window.setCursor(this.invisibleCursor);
     }
 }

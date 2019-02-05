@@ -38,7 +38,7 @@ import org.eclipse.swt.widgets.Button;
 
 import java.util.Optional;
 
-public class SwtWindowTextButton extends SwtWindowButton implements WindowTextButton {
+class SwtWindowTextButton extends SwtWindowButton implements WindowTextButton {
 
     private PaintListener paintListener;
 

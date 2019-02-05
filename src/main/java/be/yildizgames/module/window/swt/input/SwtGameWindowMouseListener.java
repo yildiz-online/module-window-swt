@@ -58,14 +58,14 @@ public final class SwtGameWindowMouseListener extends GameWindowMouseListener im
     /**
      * Full constructor.
      *
-     * @param c          SWT control element, it can be any widget with mouse interaction capability.
      * @param dispatcher Input listener
      */
-    public SwtGameWindowMouseListener(final Control c, final WindowInputListener dispatcher) {
+    private SwtGameWindowMouseListener(final WindowInputListener dispatcher) {
         super(dispatcher);
-        c.addMouseMoveListener(this);
-        c.addMouseListener(this);
-        c.addMouseWheelListener(this);
+    }
+
+    public static SwtGameWindowMouseListener create(final WindowInputListener dispatcher) {
+        return new SwtGameWindowMouseListener(dispatcher);
     }
 
     /**

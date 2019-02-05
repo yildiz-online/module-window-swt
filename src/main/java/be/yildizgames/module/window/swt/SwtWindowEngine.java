@@ -30,15 +30,7 @@ import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.input.WindowInputListener;
-import be.yildizgames.module.window.swt.input.SwtGameWindowKeyListener;
-import be.yildizgames.module.window.swt.input.SwtGameWindowMouseListener;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-
-import java.util.HashMap;
-import java.util.Map;
+import be.yildizgames.module.window.swt.widget.SwtWindowShell;
 
 /**
  * SWT implementation for the window engine.
@@ -52,12 +44,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
      */
     private final SwtGameWindow gameWindow = new SwtGameWindow();
 
-    /**
-     * A map containing all the cursor file, use their file name to get them.
-     */
-    private final Map<Cursor, org.eclipse.swt.graphics.Cursor> cursorList = new HashMap<>();
-
-    private final SwtWindow window;
+    private final SwtWindowShell window;
 
     /**
      * Simple constructor.
@@ -65,8 +52,9 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     SwtWindowEngine() {
         super();
         setGtk();
-        this.window = new SwtWindow(new Shell(SWT.NONE));
-        this.gameWindow.initialize(this.window, true, new Coordinates(window.getWidth(), window.getHeight(), 0, 0));
+        this.window = SwtWindowShell.noClose();//new SwtWindow(new Shell(SWT.NONE));
+        ScreenSize screenSize = window.getScreenSize();
+        this.gameWindow.initialize(this.window, true, new Coordinates(screenSize.width, screenSize.height, 0, 0));
         this.hideCursor();
         this.window.execute(this.window::open);
     }
@@ -74,23 +62,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     /**
      * Simple constructor.
      */
-    public SwtWindowEngine(boolean fullScreen, Coordinates c) {
-        super();
-        setGtk();
-        if(fullScreen) {
-            this.window = new SwtWindow(new Shell(SWT.NONE));
-        } else {
-            this.window = new SwtWindow();
-        }
-        this.gameWindow.initialize(this.window, fullScreen, c);
-        this.hideCursor();
-        this.window.execute(this.window::open);
-    }
-
-    /**
-     * Simple constructor.
-     */
-    public SwtWindowEngine(SwtWindow window, Coordinates c) {
+    public SwtWindowEngine(SwtWindowShell window, Coordinates c) {
         super();
         setGtk();
         this.window = window;
@@ -106,19 +78,17 @@ public final class SwtWindowEngine implements BaseWindowEngine {
 
     @Override
     public final void setWindowTitle(final String title) {
-        this.window.setWindowTitle(title);
+        this.window.setTitle(title);
     }
 
     @Override
     public final void setWindowIcon(final String file) {
-        this.window.setWindowIcon(file);
+        this.window.setIcon(file);
     }
 
     @Override
     public final Cursor createCursor(final Cursor cursor) {
-        final Image data = this.window.getImage(cursor.getPath());
-        this.cursorList.put(cursor, new org.eclipse.swt.graphics.Cursor(Display.getCurrent(), data.getImageData(), cursor.getX(), cursor.getY()));
-        return cursor;
+        return this.window.createCursor(cursor);
     }
 
     @Override
@@ -130,7 +100,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
      * @return The handle to link the game window and the 3d context.
      */
     public final WindowHandle getHandle() {
-        return new WindowHandle(this.gameWindow.getCanvas().handle);
+        return this.gameWindow.getCanvas().getHandle();
     }
 
     /**
@@ -138,23 +108,22 @@ public final class SwtWindowEngine implements BaseWindowEngine {
      */
     @Override
     public final void deleteLoadingResources() {
-        this.gameWindow.deleteLoadingResources();
-        this.gameWindow.showCursor();
+        this.window.showCursor();
     }
 
     @Override
     public final void setCursor(final Cursor cursor) {
-        this.gameWindow.setCursor(this.cursorList.get(cursor));
+        this.window.setCursor(cursor);
     }
 
     @Override
     public final void showCursor() {
-        this.gameWindow.showCursor();
+        this.window.showCursor();
     }
 
     @Override
     public final void hideCursor() {
-        this.gameWindow.hideCursor();
+        this.window.hideCursor();
     }
 
     @Override
@@ -164,10 +133,6 @@ public final class SwtWindowEngine implements BaseWindowEngine {
 
     @Override
     public void registerInput(final WindowInputListener listener) {
-        new SwtGameWindowMouseListener(this.gameWindow.getCanvas(), listener);
-        SwtGameWindowKeyListener kl = SwtGameWindowKeyListener.create(listener);
-        this.gameWindow.getCanvas().addKeyListener(kl);
-        this.gameWindow.getCanvas().setFocus();
-
+        this.gameWindow.getCanvas().registerInput(listener);
     }
 }
