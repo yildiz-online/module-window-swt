@@ -14,6 +14,9 @@ cache:
 
 services:
   - docker
+  
+before-script:
+  - npm install travis-ci
 
 before_install:
   - docker pull moussavdb/build-java
