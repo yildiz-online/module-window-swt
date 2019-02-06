@@ -40,25 +40,31 @@ class SwtWindowDropdown implements WindowDropdown {
     }
 
     @Override
-    public WindowDropdown setCoordinates(Coordinates coordinates) {
+    public final WindowDropdown setCoordinates(Coordinates coordinates) {
         this.combo.setBounds(SwtConverter.from(coordinates));
         return this;
     }
 
     @Override
-    public WindowDropdown select(int line) {
+    public final WindowDropdown setVisible(boolean visible) {
+        this.combo.setVisible(visible);
+        return this;
+    }
+
+    @Override
+    public final WindowDropdown select(int line) {
         this.combo.select(line);
         return this;
     }
 
     @Override
-    public WindowDropdown setItems(String... items) {
+    public final WindowDropdown setItems(String... items) {
         this.combo.setItems(items);
         return this;
     }
 
     @Override
-    public int getSelectionIndex() {
+    public final int getSelectionIndex() {
         return this.combo.getSelectionIndex();
     }
 }

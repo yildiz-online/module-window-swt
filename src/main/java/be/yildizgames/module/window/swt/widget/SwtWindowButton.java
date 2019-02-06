@@ -28,6 +28,7 @@ package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.input.MouseLeftClickListener;
+import be.yildizgames.module.window.widget.BaseWindowWidget;
 import be.yildizgames.module.window.widget.WindowButton;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -50,6 +51,12 @@ class SwtWindowButton implements WindowButton {
     }
 
     @Override
+    public WindowButton setCoordinates(Coordinates coordinates) {
+        this.button.setBounds(SwtConverter.from(coordinates));
+        return this;
+    }
+
+    @Override
     public final WindowButton addMouseLeftClickListener(MouseLeftClickListener l) {
         this.button.addMouseListener(new MouseAdapter() {
             @Override
@@ -59,12 +66,6 @@ class SwtWindowButton implements WindowButton {
                 }
             }
         });
-        return this;
-    }
-
-    @Override
-    public WindowButton setCoordinates(Coordinates coordinates) {
-        this.button.setBounds(SwtConverter.from(coordinates));
         return this;
     }
 }

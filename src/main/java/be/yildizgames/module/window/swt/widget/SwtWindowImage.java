@@ -48,4 +48,10 @@ class SwtWindowImage implements WindowImage {
         this.container.pack();
         return this;
     }
+
+    @Override
+    public WindowImage setVisible(boolean visible) {
+        this.container.setVisible(visible);
+        return this;
+    }
 }

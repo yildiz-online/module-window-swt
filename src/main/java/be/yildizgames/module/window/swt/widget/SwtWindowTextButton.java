@@ -27,7 +27,7 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.color.Color;
-import be.yildizgames.module.window.widget.WindowTextButton;
+import be.yildizgames.module.window.widget.WindowButtonText;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseTrackListener;
@@ -38,7 +38,7 @@ import org.eclipse.swt.widgets.Button;
 
 import java.util.Optional;
 
-class SwtWindowTextButton extends SwtWindowButton implements WindowTextButton {
+class SwtWindowTextButton extends SwtWindowButton implements WindowButtonText {
 
     private PaintListener paintListener;
 
@@ -72,7 +72,7 @@ class SwtWindowTextButton extends SwtWindowButton implements WindowTextButton {
     }
 
     @Override
-    public final WindowTextButton setText(String text) {
+    public final WindowButtonText setText(String text) {
         Image background = new Image(this.button.getShell().getDisplay(), this.button.getBounds().width, this.button.getBounds().height);
         org.eclipse.swt.graphics.Color c = SwtConverter.from(this.background);
         org.eclipse.swt.graphics.Color h = SwtConverter.from(this.highlightColor);

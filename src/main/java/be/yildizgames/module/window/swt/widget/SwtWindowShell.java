@@ -34,7 +34,7 @@ import be.yildizgames.module.window.widget.WindowDropdown;
 import be.yildizgames.module.window.widget.WindowImage;
 import be.yildizgames.module.window.widget.WindowShell;
 import be.yildizgames.module.window.widget.WindowTextArea;
-import be.yildizgames.module.window.widget.WindowTextButton;
+import be.yildizgames.module.window.widget.WindowButtonText;
 import be.yildizgames.module.window.widget.WindowTreeElement;
 import be.yildizgames.module.window.widget.WindowTreeRoot;
 import org.eclipse.swt.SWT;
@@ -191,6 +191,11 @@ public class SwtWindowShell implements WindowShell {
     }
 
     @Override
+    public void checkForEvent() {
+        this.shell.getDisplay().readAndDispatch();
+    }
+
+    @Override
     public SwtWindowShell setIcon(String file) {
         this.shell.setImage(this.imageProvider.getImage(this.shell, file));
         return this;
@@ -250,7 +255,7 @@ public class SwtWindowShell implements WindowShell {
     }
 
     @Override
-    public WindowTextButton createTextButton() {
+    public WindowButtonText createTextButton() {
         return new SwtWindowTextButton(new Button(this.shell, SWT.SMOOTH));
     }
 
@@ -270,11 +275,6 @@ public class SwtWindowShell implements WindowShell {
     @Override
     public final ScreenSize getScreenSize() {
         return new ScreenSize(this.shell.getBounds().width, this.shell.getBounds().height);
-    }
-
-    @Override
-    public void checkForEvent() {
-        this.shell.getDisplay().readAndDispatch();
     }
 
     public final void execute(final Runnable r) {

@@ -41,19 +41,19 @@ class SwtWindowProgressBar implements WindowProgressBar {
     }
 
     @Override
-    public WindowProgressBar setVisible(boolean visible) {
+    public final WindowProgressBar setVisible(boolean visible) {
         this.progressBar.setVisible(visible);
         return this;
     }
 
     @Override
-    public WindowProgressBar setProgress(int progress) {
+    public final WindowProgressBar setProgress(int progress) {
         this.progressBar.setSelection(progress);
         return this;
     }
 
     @Override
-    public WindowProgressBar setCoordinates(Coordinates coordinates) {
+    public final WindowProgressBar setCoordinates(Coordinates coordinates) {
         this.progressBar.setBounds(SwtConverter.from(coordinates));
         return this;
     }
