@@ -93,6 +93,11 @@ public final class SwtWindowEngine implements BaseWindowEngine {
 
     @Override
     public final void updateWindow() {
+        this.update();
+    }
+
+    @Override
+    public final void update() {
         this.window.checkForEvent();
     }
 
