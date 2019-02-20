@@ -38,11 +38,6 @@ import be.yildizgames.module.window.swt.widget.SwtWindowShell;
 public final class SwtGameWindow {
 
     /**
-     * The SWT shell.
-     */
-    private SwtWindowShell window;
-
-    /**
      * Canvas for the window and the 3d context.
      */
     private SwtWindowCanvas canvas;
@@ -60,12 +55,11 @@ public final class SwtGameWindow {
      * @param window Window to use as container.
      */
     public void initialize(final SwtWindowShell window, boolean fullScreenMode, Coordinates c) {
-        this.window = window;
         if (fullScreenMode) {
-            this.window.setFullScreen();
+            window.setFullScreen();
         }
-        this.window.hideCursor();
-        this.window.setBackground("engine.png");
+        window.hideCursor();
+        window.setBackground("engine.png");
         this.canvas = window.createCanvas(c);
     }
 

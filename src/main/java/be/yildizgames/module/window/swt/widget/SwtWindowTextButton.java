@@ -73,13 +73,13 @@ class SwtWindowTextButton extends SwtWindowButton implements WindowButtonText {
 
     @Override
     public final WindowButtonText setText(String text) {
-        Image background = new Image(this.button.getShell().getDisplay(), this.button.getBounds().width, this.button.getBounds().height);
+        Image bg = new Image(this.button.getShell().getDisplay(), this.button.getBounds().width, this.button.getBounds().height);
         org.eclipse.swt.graphics.Color c = SwtConverter.from(this.background);
         org.eclipse.swt.graphics.Color h = SwtConverter.from(this.highlightColor);
         org.eclipse.swt.graphics.Color t = SwtConverter.from(this.fontColor);
         Optional.ofNullable(this.paintListener).ifPresent(this.button::removePaintListener);
         this.paintListener = e -> {
-            GC gcBack = new GC(background);
+            GC gcBack = new GC(bg);
             gcBack.setAntialias(SWT.ON);
             gcBack.setBackground(bh.hover ? h : c);
             gcBack.setAlpha(255);
@@ -87,9 +87,9 @@ class SwtWindowTextButton extends SwtWindowButton implements WindowButtonText {
             gcBack.setForeground(t);
             gcBack.setFont(this.button.getFont());
             int textWidth = gcBack.getFontMetrics().getAverageCharWidth() * text.length();
-            gcBack.drawText(text, (background.getBounds().width - textWidth) >> 1, 8, true);
+            gcBack.drawText(text, (bg.getBounds().width - textWidth) >> 1, 8, true);
             gcBack.setAlpha(255);
-            e.gc.drawImage(background, 0, 0);
+            e.gc.drawImage(bg, 0, 0);
             gcBack.dispose();
         };
         this.button.addPaintListener(this.paintListener);
