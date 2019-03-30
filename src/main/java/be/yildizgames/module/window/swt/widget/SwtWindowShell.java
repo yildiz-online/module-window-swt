@@ -30,11 +30,14 @@ import be.yildizgames.module.color.Color;
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
+import be.yildizgames.module.window.widget.WindowButtonText;
 import be.yildizgames.module.window.widget.WindowDropdown;
 import be.yildizgames.module.window.widget.WindowImage;
+import be.yildizgames.module.window.widget.WindowInputBox;
+import be.yildizgames.module.window.widget.WindowMenuBar;
+import be.yildizgames.module.window.widget.WindowModalFile;
 import be.yildizgames.module.window.widget.WindowShell;
 import be.yildizgames.module.window.widget.WindowTextArea;
-import be.yildizgames.module.window.widget.WindowButtonText;
 import be.yildizgames.module.window.widget.WindowTreeElement;
 import be.yildizgames.module.window.widget.WindowTreeRoot;
 import org.eclipse.swt.SWT;
@@ -47,6 +50,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
@@ -55,8 +59,10 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class SwtWindowShell implements WindowShell {
 
@@ -257,6 +263,32 @@ public class SwtWindowShell implements WindowShell {
     @Override
     public WindowButtonText createTextButton() {
         return new SwtWindowTextButton(new Button(this.shell, SWT.SMOOTH));
+    }
+
+    @Override
+    public WindowInputBox createInputBox() {
+        return new SwtWindowInputBox(this.shell);
+    }
+
+    @Override
+    public WindowShell createChildWindow() {
+        return new SwtWindowShell(new Shell(this.shell), this.imageProvider);
+    }
+
+    @Override
+    public WindowMenuBar createMenuBar(MenuBa) {
+        return new SwtWindowMenuBar(this.shell, elements);
+    }
+
+    @Override
+    public WindowModalFile createOpenFileBox() {
+        FileDialog fd = this.shell.createOpenFileDialog("Open");
+        fd.setFilterPath(configuration.rootPath);
+        fd.setFilterExtensions(new String[] { "*.yzf" });
+        String selected = fd.open();
+        Optional.ofNullable(selected).ifPresent(s ->
+                this.listeners.forEach(l -> l.onLoad(JsonToObject.toProject(FromFile.load(Paths.get(s))))));
+        return null;
     }
 
     /**

@@ -26,6 +26,7 @@
 
 package be.yildizgames.module.window.swt.widget;
 
+import be.yildizgames.module.color.Color;
 import be.yildizgames.module.window.widget.WindowTextLine;
 import org.eclipse.swt.widgets.Label;
 
@@ -53,6 +54,22 @@ class SwtWindowText implements WindowTextLine {
     @Override
     public final WindowTextLine setPosition(int left, int top) {
         this.label.setLocation(left, top);
+        return this;
+    }
+
+    @Override
+    public int getLeft() {
+        return this.label.getLocation().x;
+    }
+
+    @Override
+    public int getTop() {
+        return this.label.getLocation().y;
+    }
+
+    @Override
+    public WindowTextLine setColor(Color color) {
+        //this.label.setForeground();
         return this;
     }
 }

@@ -25,6 +25,9 @@
  */
 package be.yildizgames.module.window.swt.widget;
 
+import be.yildizgames.module.window.widget.WindowMenuBarElement;
+import be.yildizgames.module.window.widget.WindowMenuElement;
+import be.yildizgames.module.window.widget.WindowMenuBar;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
@@ -34,23 +37,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class SwtWindowMenuBar {
+public class SwtWindowMenuBar implements WindowMenuBar {
 
     private final Menu menu;
 
     private final Map<Integer, MenuItem> items = new HashMap<>();
 
-    SwtWindowMenuBar(Shell shell, SwtWindowMenuBarElement... barElements) {
+    SwtWindowMenuBar(Shell shell, WindowMenuBarElement... barElements) {
         super();
         this.menu = new Menu(shell, SWT.BAR);
         shell.setMenuBar(menu);
-        for(SwtWindowMenuBarElement e : barElements) {
+        for(WindowMenuBarElement e : barElements) {
             this.addToMenu(menu, e);
         }
         this.menu.setVisible(true);
     }
 
-    private void addToMenu(Menu menu, SwtWindowMenuBarElement e) {
+    private void addToMenu(Menu menu, WindowMenuBarElement e) {
         MenuItem title = new MenuItem(menu, SWT.CASCADE);
         title.setText("&" + e.title);
         Menu sub = new Menu(menu.getShell(), SWT.DROP_DOWN);
@@ -58,7 +61,7 @@ public class SwtWindowMenuBar {
         e.getChildren().forEach(elmt -> createMenuElement(sub, elmt));
     }
 
-    private void createMenuElement(Menu parent, SwtWindowMenuElement e) {
+    private void createMenuElement(Menu parent, WindowMenuElement e) {
         MenuItem p = new MenuItem(parent, SWT.PUSH);
         p.setText("&" + e.title);
         p.addSelectionListener(e.behavior);

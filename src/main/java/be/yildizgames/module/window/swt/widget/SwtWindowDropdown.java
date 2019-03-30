@@ -30,6 +30,8 @@ import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.widget.WindowDropdown;
 import org.eclipse.swt.widgets.Combo;
 
+import java.util.Arrays;
+
 class SwtWindowDropdown implements WindowDropdown {
 
     private final Combo combo;
@@ -58,8 +60,10 @@ class SwtWindowDropdown implements WindowDropdown {
     }
 
     @Override
-    public final WindowDropdown setItems(String... items) {
-        this.combo.setItems(items);
+    public WindowDropdown setItems(Object... items) {
+        this.combo.setItems(Arrays.stream(items)
+                .map(Object::toString)
+                .toArray(String[]::new));
         return this;
     }
 
