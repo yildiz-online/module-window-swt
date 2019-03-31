@@ -71,4 +71,24 @@ class SwtWindowDropdown implements WindowDropdown {
     public final int getSelectionIndex() {
         return this.combo.getSelectionIndex();
     }
+
+    @Override
+    public int getLeft() {
+        return this.combo.getLocation().x;
+    }
+
+    @Override
+    public int getRight() {
+        return this.combo.getLocation().x + this.combo.getSize().x;
+    }
+
+    @Override
+    public int getTop() {
+        return this.combo.getLocation().y;
+    }
+
+    @Override
+    public int getBottom() {
+        return this.combo.getLocation().y + this.combo.getSize().y;
+    }
 }

@@ -35,7 +35,7 @@ import be.yildizgames.module.window.widget.WindowDropdown;
 import be.yildizgames.module.window.widget.WindowImage;
 import be.yildizgames.module.window.widget.WindowInputBox;
 import be.yildizgames.module.window.widget.WindowMenuBar;
-import be.yildizgames.module.window.widget.WindowMenuBarElement;
+import be.yildizgames.module.window.widget.WindowMenuBarElementDefinition;
 import be.yildizgames.module.window.widget.WindowModalFile;
 import be.yildizgames.module.window.widget.WindowShell;
 import be.yildizgames.module.window.widget.WindowTextArea;
@@ -249,6 +249,26 @@ public class SwtWindowShell implements WindowShell {
     }
 
     @Override
+    public int getLeft() {
+        return this.shell.getLocation().x;
+    }
+
+    @Override
+    public int getRight() {
+        return this.shell.getLocation().x + this.shell.getSize().x;
+    }
+
+    @Override
+    public int getTop() {
+        return this.shell.getLocation().y;
+    }
+
+    @Override
+    public int getBottom() {
+        return this.shell.getLocation().y + this.shell.getSize().y;
+    }
+
+    @Override
     public final WindowTreeRoot createTreeRoot(int height, int width, WindowTreeElement... elements) {
         return SwtWindowTreeRoot.create(this.shell, height, width, elements);
     }
@@ -274,7 +294,7 @@ public class SwtWindowShell implements WindowShell {
     }
 
     @Override
-    public WindowMenuBar createMenuBar(WindowMenuBarElement... elements) {
+    public WindowMenuBar createMenuBar(WindowMenuBarElementDefinition... elements) {
         return new SwtWindowMenuBar(this.shell, elements);
     }
 

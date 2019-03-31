@@ -56,4 +56,24 @@ class SwtWindowTextArea implements WindowTextArea {
         this.textArea.setText(text);
         return this;
     }
+
+    @Override
+    public int getLeft() {
+        return this.textArea.getLocation().x;
+    }
+
+    @Override
+    public int getRight() {
+        return this.textArea.getLocation().x + this.textArea.getSize().x;
+    }
+
+    @Override
+    public int getTop() {
+        return this.textArea.getLocation().y;
+    }
+
+    @Override
+    public int getBottom() {
+        return this.textArea.getLocation().y + this.textArea.getSize().y;
+    }
 }

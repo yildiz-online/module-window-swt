@@ -54,4 +54,24 @@ class SwtWindowImage implements WindowImage {
         this.container.setVisible(visible);
         return this;
     }
+
+    @Override
+    public int getLeft() {
+        return this.container.getLocation().x;
+    }
+
+    @Override
+    public int getRight() {
+        return this.container.getLocation().x + this.container.getSize().x;
+    }
+
+    @Override
+    public int getTop() {
+        return this.container.getLocation().y;
+    }
+
+    @Override
+    public int getBottom() {
+        return this.container.getLocation().y + this.container.getSize().y;
+    }
 }

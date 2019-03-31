@@ -26,8 +26,9 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.window.widget.WindowMenuBar;
-import be.yildizgames.module.window.widget.WindowMenuBarElement;
+import be.yildizgames.module.window.widget.WindowMenuBarElementDefinition;
 import be.yildizgames.module.window.widget.WindowMenuElement;
+import be.yildizgames.module.window.widget.WindowMenuElementDefinition;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -41,21 +42,19 @@ import java.util.Optional;
 
 public class SwtWindowMenuBar implements WindowMenuBar {
 
-    private final Menu menu;
+    private final Map<Integer, WindowMenuElement> items = new HashMap<>();
 
-    private final Map<Integer, MenuItem> items = new HashMap<>();
-
-    SwtWindowMenuBar(Shell shell, WindowMenuBarElement... barElements) {
+    SwtWindowMenuBar(Shell shell, WindowMenuBarElementDefinition... barElements) {
         super();
-        this.menu = new Menu(shell, SWT.BAR);
+        Menu menu = new Menu(shell, SWT.BAR);
         shell.setMenuBar(menu);
-        for(WindowMenuBarElement e : barElements) {
+        for(WindowMenuBarElementDefinition e : barElements) {
             this.addToMenu(menu, e);
         }
-        this.menu.setVisible(true);
+        menu.setVisible(true);
     }
 
-    private void addToMenu(Menu menu, WindowMenuBarElement e) {
+    private void addToMenu(Menu menu, WindowMenuBarElementDefinition e) {
         MenuItem title = new MenuItem(menu, SWT.CASCADE);
         title.setText("&" + e.title);
         Menu sub = new Menu(menu.getShell(), SWT.DROP_DOWN);
@@ -63,7 +62,7 @@ public class SwtWindowMenuBar implements WindowMenuBar {
         e.getChildren().forEach(elmt -> createMenuElement(sub, elmt));
     }
 
-    private void createMenuElement(Menu parent, WindowMenuElement e) {
+    private void createMenuElement(Menu parent, WindowMenuElementDefinition e) {
         MenuItem p = new MenuItem(parent, SWT.PUSH);
         p.setText("&" + e.title);
         p.addSelectionListener(new SelectionAdapter() {
@@ -72,10 +71,11 @@ public class SwtWindowMenuBar implements WindowMenuBar {
                 e.listener.select();
             }
         });
-        this.items.put(e.id, p);
+        this.items.put(e.id, new SwtWindowMenuElement(p));
     }
 
-    public Optional<MenuItem> getItemById(int id) {
+    @Override
+    public Optional<WindowMenuElement> getItemById(int id) {
         return Optional.ofNullable(this.items.get(id));
     }
 }

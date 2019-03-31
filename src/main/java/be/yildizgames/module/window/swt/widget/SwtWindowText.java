@@ -27,7 +27,9 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.color.Color;
+import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.widget.WindowTextLine;
+import be.yildizgames.module.window.widget.WindowWidget;
 import org.eclipse.swt.widgets.Label;
 
 class SwtWindowText implements WindowTextLine {
@@ -37,6 +39,13 @@ class SwtWindowText implements WindowTextLine {
     SwtWindowText(Label label) {
         super();
         this.label = label;
+    }
+
+    @Override
+    public WindowWidget setCoordinates(Coordinates coordinates) {
+        this.label.setLocation(coordinates.left, coordinates.top);
+        this.label.setSize(coordinates.width, coordinates.height);
+        return this;
     }
 
     @Override
@@ -58,8 +67,24 @@ class SwtWindowText implements WindowTextLine {
     }
 
     @Override
+    public WindowTextLine setColor(Color color) {
+        //this.label.setForeground();
+        return this;
+    }
+
+    @Override
+    public String getText() {
+        return this.label.getText();
+    }
+
+    @Override
     public int getLeft() {
         return this.label.getLocation().x;
+    }
+
+    @Override
+    public int getRight() {
+        return this.label.getLocation().x + this.label.getSize().x;
     }
 
     @Override
@@ -68,8 +93,7 @@ class SwtWindowText implements WindowTextLine {
     }
 
     @Override
-    public WindowTextLine setColor(Color color) {
-        //this.label.setForeground();
-        return this;
+    public int getBottom() {
+        return this.label.getLocation().y + this.label.getSize().y;
     }
 }

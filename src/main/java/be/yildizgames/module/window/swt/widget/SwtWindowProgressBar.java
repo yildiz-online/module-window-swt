@@ -57,4 +57,24 @@ class SwtWindowProgressBar implements WindowProgressBar {
         this.progressBar.setBounds(SwtConverter.from(coordinates));
         return this;
     }
+
+    @Override
+    public int getLeft() {
+        return this.progressBar.getLocation().x;
+    }
+
+    @Override
+    public int getRight() {
+        return this.progressBar.getLocation().x + this.progressBar.getSize().x;
+    }
+
+    @Override
+    public int getTop() {
+        return this.progressBar.getLocation().y;
+    }
+
+    @Override
+    public int getBottom() {
+        return this.progressBar.getLocation().y + this.progressBar.getSize().y;
+    }
 }

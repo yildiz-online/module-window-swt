@@ -28,7 +28,6 @@ package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.input.MouseLeftClickListener;
-import be.yildizgames.module.window.widget.BaseWindowWidget;
 import be.yildizgames.module.window.widget.WindowButton;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -67,6 +66,26 @@ class SwtWindowButton implements WindowButton {
             }
         });
         return this;
+    }
+
+    @Override
+    public int getLeft() {
+        return this.button.getLocation().x;
+    }
+
+    @Override
+    public int getRight() {
+        return this.button.getLocation().x + this.button.getSize().x;
+    }
+
+    @Override
+    public int getTop() {
+        return this.button.getLocation().y;
+    }
+
+    @Override
+    public int getBottom() {
+        return this.button.getLocation().y + this.button.getSize().y;
     }
 }
 
