@@ -25,6 +25,7 @@ package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.widget.WindowInputBox;
+import be.yildizgames.module.window.widget.WindowInputBoxChangeListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -66,8 +67,8 @@ public class SwtWindowInputBox implements WindowInputBox {
     }
 
     @Override
-    public WindowInputBox onChange(Object o) {
-        this.input.addModifyListener(o);
+    public WindowInputBox onChange(WindowInputBoxChangeListener l) {
+        this.input.addModifyListener(modifyEvent -> l.onChange());
         return this;
     }
 }

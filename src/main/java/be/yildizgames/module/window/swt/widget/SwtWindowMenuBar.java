@@ -25,10 +25,12 @@
  */
 package be.yildizgames.module.window.swt.widget;
 
+import be.yildizgames.module.window.widget.WindowMenuBar;
 import be.yildizgames.module.window.widget.WindowMenuBarElement;
 import be.yildizgames.module.window.widget.WindowMenuElement;
-import be.yildizgames.module.window.widget.WindowMenuBar;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
@@ -64,7 +66,12 @@ public class SwtWindowMenuBar implements WindowMenuBar {
     private void createMenuElement(Menu parent, WindowMenuElement e) {
         MenuItem p = new MenuItem(parent, SWT.PUSH);
         p.setText("&" + e.title);
-        p.addSelectionListener(e.behavior);
+        p.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent event) {
+                e.listener.select();
+            }
+        });
         this.items.put(e.id, p);
     }
 

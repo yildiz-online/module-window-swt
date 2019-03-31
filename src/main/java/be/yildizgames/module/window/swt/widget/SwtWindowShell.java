@@ -35,6 +35,7 @@ import be.yildizgames.module.window.widget.WindowDropdown;
 import be.yildizgames.module.window.widget.WindowImage;
 import be.yildizgames.module.window.widget.WindowInputBox;
 import be.yildizgames.module.window.widget.WindowMenuBar;
+import be.yildizgames.module.window.widget.WindowMenuBarElement;
 import be.yildizgames.module.window.widget.WindowModalFile;
 import be.yildizgames.module.window.widget.WindowShell;
 import be.yildizgames.module.window.widget.WindowTextArea;
@@ -50,7 +51,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
@@ -59,10 +59,8 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class SwtWindowShell implements WindowShell {
 
@@ -276,19 +274,13 @@ public class SwtWindowShell implements WindowShell {
     }
 
     @Override
-    public WindowMenuBar createMenuBar(MenuBa) {
+    public WindowMenuBar createMenuBar(WindowMenuBarElement... elements) {
         return new SwtWindowMenuBar(this.shell, elements);
     }
 
     @Override
     public WindowModalFile createOpenFileBox() {
-        FileDialog fd = this.shell.createOpenFileDialog("Open");
-        fd.setFilterPath(configuration.rootPath);
-        fd.setFilterExtensions(new String[] { "*.yzf" });
-        String selected = fd.open();
-        Optional.ofNullable(selected).ifPresent(s ->
-                this.listeners.forEach(l -> l.onLoad(JsonToObject.toProject(FromFile.load(Paths.get(s))))));
-        return null;
+        return new SwtWindowModalFile(this.shell);
     }
 
     /**

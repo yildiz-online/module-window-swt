@@ -86,7 +86,7 @@ class SwtWindowTextButton extends SwtWindowButton implements WindowButtonText {
             gcBack.fillRectangle(0, 0, button.getBounds().width, button.getBounds().height);
             gcBack.setForeground(t);
             gcBack.setFont(this.button.getFont());
-            int textWidth = gcBack.getFontMetrics().getAverageCharWidth() * text.length();
+            int textWidth = (int) gcBack.getFontMetrics().getAverageCharacterWidth() * text.length();
             gcBack.drawText(text, (bg.getBounds().width - textWidth) >> 1, 8, true);
             gcBack.setAlpha(255);
             e.gc.drawImage(bg, 0, 0);
