@@ -26,46 +26,40 @@
 
 package be.yildizgames.module.window.swt.widget;
 
-import be.yildizgames.module.coordinate.Coordinates;
-import be.yildizgames.module.window.input.MouseLeftClickListener;
-import be.yildizgames.module.window.widget.WindowButton;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Button;
+import be.yildizgames.module.window.widget.WindowWidget;
+import org.eclipse.swt.widgets.Canvas;
 
-class SwtWindowButton extends BaseSwtWindowWidget<WindowButton> implements WindowButton {
+/**
+ * @author Grégory Van den Borre
+ * @param <T> Wrapped element to return with chaining.
+ */
+abstract class BaseSwtWindowWidget<T extends WindowWidget> implements WindowWidget<T> {
 
-    protected final Button button;
+    private final Control control;
 
-    SwtWindowButton(Button button) {
-        super(button);
-        this.button = button;
+    protected BaseSwtWindowWidget(Control control) {
+        super();
+        this.control = control;
     }
 
     @Override
-    public final WindowButton setVisible(boolean visible) {
-        this.button.setVisible(visible);
-        return this;
+    public final int getLeft() {
+        return this.control.getLocation().x;
     }
 
     @Override
-    public WindowButton setCoordinates(Coordinates coordinates) {
-        this.button.setBounds(SwtConverter.from(coordinates));
-        return this;
+    public final int getRight() {
+        return this.control.getLocation().x + this.control.getSize().x;
     }
 
     @Override
-    public final WindowButton addMouseLeftClickListener(MouseLeftClickListener l) {
-        this.button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseDown(MouseEvent e) {
-                if(e.button == SWT.Selection) {
-                    l.click();
-                }
-            }
-        });
-        return this;
+    public final int getTop() {
+        return this.control.getLocation().y;
     }
+
+    @Override
+    public final int getBottom() {
+        return this.control.getLocation().y + this.control.getSize().y;
+    }
+
 }
-

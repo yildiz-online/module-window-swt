@@ -32,17 +32,17 @@ import be.yildizgames.module.window.widget.WindowTextLine;
 import be.yildizgames.module.window.widget.WindowWidget;
 import org.eclipse.swt.widgets.Label;
 
-class SwtWindowText implements WindowTextLine {
+class SwtWindowText extends BaseSwtWindowWidget<WindowTextLine> implements WindowTextLine {
 
     private final Label label;
 
     SwtWindowText(Label label) {
-        super();
+        super(label);
         this.label = label;
     }
 
     @Override
-    public WindowWidget setCoordinates(Coordinates coordinates) {
+    public WindowTextLine setCoordinates(Coordinates coordinates) {
         this.label.setLocation(coordinates.left, coordinates.top);
         this.label.setSize(coordinates.width, coordinates.height);
         return this;
@@ -75,25 +75,5 @@ class SwtWindowText implements WindowTextLine {
     @Override
     public String getText() {
         return this.label.getText();
-    }
-
-    @Override
-    public int getLeft() {
-        return this.label.getLocation().x;
-    }
-
-    @Override
-    public int getRight() {
-        return this.label.getLocation().x + this.label.getSize().x;
-    }
-
-    @Override
-    public int getTop() {
-        return this.label.getLocation().y;
-    }
-
-    @Override
-    public int getBottom() {
-        return this.label.getLocation().y + this.label.getSize().y;
     }
 }

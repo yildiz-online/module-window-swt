@@ -29,13 +29,13 @@ import be.yildizgames.module.window.widget.WindowInputBoxChangeListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class SwtWindowInputBox implements WindowInputBox {
+public class SwtWindowInputBox extends BaseSwtWindowWidget<WindowInputBox> implements WindowInputBox {
 
     private final Text input;
 
-    public SwtWindowInputBox(Shell parent) {
-        super();
-        this.input = new Text(parent, 0);
+    public SwtWindowInputBox(Text text) {
+        super(text);
+        this.input = text;
     }
 
     @Override
@@ -70,25 +70,5 @@ public class SwtWindowInputBox implements WindowInputBox {
     public WindowInputBox onChange(WindowInputBoxChangeListener l) {
         this.input.addModifyListener(modifyEvent -> l.onChange());
         return this;
-    }
-
-    @Override
-    public int getLeft() {
-        return this.input.getLocation().x;
-    }
-
-    @Override
-    public int getRight() {
-        return this.input.getLocation().x + this.input.getSize().x;
-    }
-
-    @Override
-    public int getTop() {
-        return this.input.getLocation().y;
-    }
-
-    @Override
-    public int getBottom() {
-        return this.input.getLocation().y + this.input.getSize().y;
     }
 }

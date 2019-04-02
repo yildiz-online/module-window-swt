@@ -32,12 +32,12 @@ import be.yildizgames.module.window.widget.WindowImage;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Label;
 
-class SwtWindowImage implements WindowImage {
+class SwtWindowImage extends BaseSwtWindowWidget<WindowImage> implements WindowImage {
 
     private final Label container;
 
     SwtWindowImage(Label container, Image image) {
-        super();
+        super(container);
         this.container = container;
         this.container.setImage(image);
     }
@@ -53,25 +53,5 @@ class SwtWindowImage implements WindowImage {
     public WindowImage setVisible(boolean visible) {
         this.container.setVisible(visible);
         return this;
-    }
-
-    @Override
-    public int getLeft() {
-        return this.container.getLocation().x;
-    }
-
-    @Override
-    public int getRight() {
-        return this.container.getLocation().x + this.container.getSize().x;
-    }
-
-    @Override
-    public int getTop() {
-        return this.container.getLocation().y;
-    }
-
-    @Override
-    public int getBottom() {
-        return this.container.getLocation().y + this.container.getSize().y;
     }
 }

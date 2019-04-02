@@ -286,7 +286,7 @@ public class SwtWindowShell implements WindowShell {
 
     @Override
     public WindowInputBox createInputBox() {
-        return new SwtWindowInputBox(this.shell);
+        return new SwtWindowInputBox(new Text(parent, SWT.SMOOTH));
     }
 
     @Override
