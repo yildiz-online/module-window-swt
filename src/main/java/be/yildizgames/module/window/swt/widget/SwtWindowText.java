@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Label;
 /**
  * @author Grégory Van den Borre
  */
-class SwtWindowText extends BaseSwtWindowWidget<WindowTextLine> implements WindowTextLine {
+class SwtWindowText extends BaseSwtWindowWidget <WindowTextLine> implements WindowTextLine {
 
     private final Label label;
 
