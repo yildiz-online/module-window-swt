@@ -30,13 +30,13 @@ import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.widget.WindowProgressBar;
 import org.eclipse.swt.widgets.ProgressBar;
 
-class SwtWindowProgressBar implements WindowProgressBar {
+class SwtWindowProgressBar extends BaseSwtWindowWidget<WindowProgressBar> implements WindowProgressBar {
 
     private final ProgressBar progressBar;
 
 
     SwtWindowProgressBar(ProgressBar progressBar) {
-        super();
+        super(progressBar);
         this.progressBar = progressBar;
     }
 
@@ -56,25 +56,5 @@ class SwtWindowProgressBar implements WindowProgressBar {
     public final WindowProgressBar setCoordinates(Coordinates coordinates) {
         this.progressBar.setBounds(SwtConverter.from(coordinates));
         return this;
-    }
-
-    @Override
-    public int getLeft() {
-        return this.progressBar.getLocation().x;
-    }
-
-    @Override
-    public int getRight() {
-        return this.progressBar.getLocation().x + this.progressBar.getSize().x;
-    }
-
-    @Override
-    public int getTop() {
-        return this.progressBar.getLocation().y;
-    }
-
-    @Override
-    public int getBottom() {
-        return this.progressBar.getLocation().y + this.progressBar.getSize().y;
     }
 }
