@@ -33,11 +33,14 @@ import org.eclipse.swt.widgets.Shell;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-public class SwtWindowModalFile implements WindowModalFile {
+/**
+ * @author Grégory Van den Borre
+ */
+class SwtWindowModalFile implements WindowModalFile {
 
     private final FileDialog fileDialog;
 
-    public SwtWindowModalFile(Shell parent) {
+    SwtWindowModalFile(Shell parent) {
         super();
         this.fileDialog = new FileDialog(parent,0);
     }

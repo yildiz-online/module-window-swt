@@ -30,12 +30,15 @@ import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.widget.WindowTextArea;
 import org.eclipse.swt.widgets.Text;
 
-class SwtWindowTextArea implements WindowTextArea {
+/**
+ * @author Grégory Van den Borre
+ */
+class SwtWindowTextArea extends BaseSwtWindowWidget<WindowTextArea> implements WindowTextArea {
 
     private final Text textArea;
 
     SwtWindowTextArea(Text textArea) {
-        super();
+        super(textArea);
         this.textArea = textArea;
     }
 
@@ -55,25 +58,5 @@ class SwtWindowTextArea implements WindowTextArea {
     public WindowTextArea setText(String text) {
         this.textArea.setText(text);
         return this;
-    }
-
-    @Override
-    public int getLeft() {
-        return this.textArea.getLocation().x;
-    }
-
-    @Override
-    public int getRight() {
-        return this.textArea.getLocation().x + this.textArea.getSize().x;
-    }
-
-    @Override
-    public int getTop() {
-        return this.textArea.getLocation().y;
-    }
-
-    @Override
-    public int getBottom() {
-        return this.textArea.getLocation().y + this.textArea.getSize().y;
     }
 }

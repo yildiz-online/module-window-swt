@@ -40,7 +40,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class SwtWindowMenuBar implements WindowMenuBar {
+/**
+ * @author Grégory Van den Borre
+ */
+class SwtWindowMenuBar implements WindowMenuBar {
 
     private final Map<Integer, WindowMenuElement> items = new HashMap<>();
 

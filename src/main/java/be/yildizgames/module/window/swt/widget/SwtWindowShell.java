@@ -63,7 +63,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-public class SwtWindowShell implements WindowShell {
+public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements WindowShell {
 
     private final Shell shell;
 
@@ -79,7 +79,7 @@ public class SwtWindowShell implements WindowShell {
     private final Cursor invisibleCursor;
 
     private SwtWindowShell(final Shell shell, SwtImageProvider imageProvider) {
-        super();
+        super(shell);
         this.imageProvider = imageProvider;
         this.shell = shell;
         this.shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
@@ -247,26 +247,6 @@ public class SwtWindowShell implements WindowShell {
     public WindowShell setVisible(boolean visible) {
         this.shell.setVisible(visible);
         return this;
-    }
-
-    @Override
-    public int getLeft() {
-        return this.shell.getLocation().x;
-    }
-
-    @Override
-    public int getRight() {
-        return this.shell.getLocation().x + this.shell.getSize().x;
-    }
-
-    @Override
-    public int getTop() {
-        return this.shell.getLocation().y;
-    }
-
-    @Override
-    public int getBottom() {
-        return this.shell.getLocation().y + this.shell.getSize().y;
     }
 
     @Override

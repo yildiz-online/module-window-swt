@@ -26,6 +26,9 @@ package be.yildizgames.module.window.swt.widget;
 import be.yildizgames.module.window.widget.WindowMenuElement;
 import org.eclipse.swt.widgets.MenuItem;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowMenuElement implements WindowMenuElement {
 
     private final MenuItem item;

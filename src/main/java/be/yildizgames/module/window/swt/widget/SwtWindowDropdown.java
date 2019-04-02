@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Combo;
 
 import java.util.Arrays;
 
-class SwtWindowDropdown implements WindowDropdown {
+class SwtWindowDropdown extends BaseSwtWindowWidget<WindowDropdown> implements WindowDropdown {
 
     private final Combo combo;
 
@@ -70,25 +70,5 @@ class SwtWindowDropdown implements WindowDropdown {
     @Override
     public final int getSelectionIndex() {
         return this.combo.getSelectionIndex();
-    }
-
-    @Override
-    public int getLeft() {
-        return this.combo.getLocation().x;
-    }
-
-    @Override
-    public int getRight() {
-        return this.combo.getLocation().x + this.combo.getSize().x;
-    }
-
-    @Override
-    public int getTop() {
-        return this.combo.getLocation().y;
-    }
-
-    @Override
-    public int getBottom() {
-        return this.combo.getLocation().y + this.combo.getSize().y;
     }
 }

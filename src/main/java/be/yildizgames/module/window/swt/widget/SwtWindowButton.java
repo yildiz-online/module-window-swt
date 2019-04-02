@@ -34,6 +34,9 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Button;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowButton extends BaseSwtWindowWidget<WindowButton> implements WindowButton {
 
     protected final Button button;
