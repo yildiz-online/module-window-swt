@@ -29,11 +29,14 @@ import be.yildizgames.module.window.widget.WindowInputBoxChangeListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class SwtWindowInputBox extends BaseSwtWindowWidget<WindowInputBox> implements WindowInputBox {
+/**
+ * @author Grégory Van den Borre
+ */
+class SwtWindowInputBox extends BaseSwtWindowWidget<WindowInputBox> implements WindowInputBox {
 
     private final Text input;
 
-    public SwtWindowInputBox(Text text) {
+    SwtWindowInputBox(Text text) {
         super(text);
         this.input = text;
     }

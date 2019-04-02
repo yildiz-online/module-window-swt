@@ -32,6 +32,9 @@ import be.yildizgames.module.window.widget.WindowImage;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Label;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowImage extends BaseSwtWindowWidget<WindowImage> implements WindowImage {
 
     private final Label container;

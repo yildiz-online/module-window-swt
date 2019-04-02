@@ -32,6 +32,9 @@ import be.yildizgames.module.window.widget.WindowTextLine;
 import be.yildizgames.module.window.widget.WindowWidget;
 import org.eclipse.swt.widgets.Label;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowText extends BaseSwtWindowWidget<WindowTextLine> implements WindowTextLine {
 
     private final Label label;
