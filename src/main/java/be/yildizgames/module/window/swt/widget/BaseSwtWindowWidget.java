@@ -27,7 +27,7 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.window.widget.WindowWidget;
-import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.Control;
 
 /**
  * @author Grégory Van den Borre

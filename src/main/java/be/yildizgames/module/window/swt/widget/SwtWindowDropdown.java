@@ -37,7 +37,7 @@ class SwtWindowDropdown extends BaseSwtWindowWidget<WindowDropdown> implements W
     private final Combo combo;
 
     SwtWindowDropdown(Combo combo) {
-        super();
+        super(combo);
         this.combo = combo;
     }
 

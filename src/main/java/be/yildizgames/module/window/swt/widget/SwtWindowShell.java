@@ -266,7 +266,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
 
     @Override
     public WindowInputBox createInputBox() {
-        return new SwtWindowInputBox(new Text(parent, SWT.SMOOTH));
+        return new SwtWindowInputBox(new Text(this.shell, SWT.SMOOTH));
     }
 
     @Override
