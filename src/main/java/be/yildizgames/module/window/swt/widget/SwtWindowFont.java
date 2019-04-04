@@ -26,57 +26,41 @@
 
 package be.yildizgames.module.window.swt.widget;
 
-import be.yildizgames.module.color.Color;
-import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.widget.WindowFont;
-import be.yildizgames.module.window.widget.WindowTextArea;
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.widgets.Shell;
 
-/**
- * @author Grégory Van den Borre
- */
-class SwtWindowTextArea extends BaseSwtWindowWidget<WindowTextArea> implements WindowTextArea {
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
-    private final Text textArea;
+class SwtWindowFont implements WindowFont {
 
-    SwtWindowTextArea(Text textArea) {
-        super(textArea);
-        this.textArea = textArea;
+    private static final Map<UUID, SwtWindowFont> fonts = new HashMap<>();
+
+    private final Font font;
+
+    private final UUID id;
+
+    SwtWindowFont(Shell shell, String file, int size) {
+        super();
+        this.id = UUID.randomUUID();
+        this.font = new Font(shell.getDisplay(), new FontData(file, size , SWT.NONE));
+        fonts.put(this.id, this);
+    }
+
+    public static SwtWindowFont getById(UUID uuid) {
+        return fonts.get(uuid);
     }
 
     @Override
-    public WindowTextArea setVisible(boolean visible) {
-        this.textArea.setVisible(visible);
-        return this;
+    public final UUID getId() {
+        return this.id;
     }
 
-    @Override
-    public WindowTextArea setCoordinates(Coordinates coordinates) {
-        this.textArea.setBounds(SwtConverter.from(coordinates));
-        return this;
-    }
-
-    @Override
-    public WindowTextArea setText(String text) {
-        this.textArea.setText(text);
-        return this;
-    }
-
-    @Override
-    public WindowTextArea setBackground(Color color) {
-        this.textArea.setBackground(SwtConverter.from(color));
-        return this;
-    }
-
-    @Override
-    public WindowTextArea setFont(WindowFont font) {
-        this.textArea.setFont(SwtWindowFont.getById(font.getId()).getInnerFont());
-        return this;
-    }
-
-    @Override
-    public WindowTextArea setForeground(Color color) {
-        this.textArea.setForeground(SwtConverter.from(color));
-        return this;
+    Font getInnerFont() {
+        return this.font;
     }
 }

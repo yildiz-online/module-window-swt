@@ -53,7 +53,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
         super();
         setGtk();
         this.window = SwtWindowShell.noClose();//new SwtWindow(new Shell(SWT.NONE));
-        ScreenSize screenSize = window.getScreenSize();
+        ScreenSize screenSize = window.getSize();
         this.gameWindow.initialize(this.window, true, new Coordinates(screenSize.width, screenSize.height, 0, 0));
         this.hideCursor();
         this.window.execute(this.window::open);
@@ -133,7 +133,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
 
     @Override
     public final ScreenSize getScreenSize() {
-        return this.window.getScreenSize();
+        return this.window.getSize();
     }
 
     @Override

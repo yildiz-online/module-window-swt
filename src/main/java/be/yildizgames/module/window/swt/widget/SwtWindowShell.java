@@ -32,6 +32,7 @@ import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.widget.WindowButtonText;
 import be.yildizgames.module.window.widget.WindowDropdown;
+import be.yildizgames.module.window.widget.WindowFont;
 import be.yildizgames.module.window.widget.WindowImage;
 import be.yildizgames.module.window.widget.WindowInputBox;
 import be.yildizgames.module.window.widget.WindowMenuBar;
@@ -61,7 +62,6 @@ import org.eclipse.swt.widgets.Text;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements WindowShell {
 
@@ -167,7 +167,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
 
     @Override
     public WindowTextArea createTextArea() {
-        return new SwtWindowTextArea(new Text(this.shell, SWT.SMOOTH));
+        return new SwtWindowTextArea(new Text(this.shell, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL));
     }
 
     @Override
@@ -284,6 +284,11 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
         return new SwtWindowModalFile(this.shell);
     }
 
+    @Override
+    public WindowFont createFont(String path, int height) {
+        return new SwtWindowFont(this.shell,path, height);
+    }
+
     /**
      * Make the window use all the screen and remove the title bar.
      */
@@ -298,8 +303,15 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     }
 
     @Override
-    public final ScreenSize getScreenSize() {
+    public final ScreenSize getSize() {
         return new ScreenSize(this.shell.getBounds().width, this.shell.getBounds().height);
+    }
+
+    @Override
+    public final ScreenSize getMonitorSize() {
+        return new ScreenSize(
+                (int)(shell.getDisplay().getPrimaryMonitor().getBounds().width),
+                (int)(shell.getDisplay().getPrimaryMonitor().getBounds().height));
     }
 
     public final void execute(final Runnable r) {

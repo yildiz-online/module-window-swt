@@ -76,7 +76,7 @@ class SwtWindowTextButton extends SwtWindowButton implements WindowButtonText {
 
     @Override
     public final WindowButtonText setText(String text) {
-        Image bg = new Image(this.button.getShell().getDisplay(), this.button.getBounds().width, this.button.getBounds().height);
+        Image bg = new Image(this.button.getShell().getDisplay(), this.button.getBounds().width + 1, this.button.getBounds().height + 1);
         org.eclipse.swt.graphics.Color c = SwtConverter.from(this.background);
         org.eclipse.swt.graphics.Color h = SwtConverter.from(this.highlightColor);
         org.eclipse.swt.graphics.Color t = SwtConverter.from(this.fontColor);
