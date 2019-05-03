@@ -68,6 +68,12 @@ class SwtWindowDropdown extends BaseSwtWindowWidget<WindowDropdown> implements W
     }
 
     @Override
+    public WindowDropdown setItems(String... items) {
+        this.combo.setItems(items);
+        return this;
+    }
+
+    @Override
     public final int getSelectionIndex() {
         return this.combo.getSelectionIndex();
     }
