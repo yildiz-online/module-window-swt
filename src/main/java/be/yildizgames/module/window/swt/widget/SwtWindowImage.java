@@ -46,14 +46,14 @@ class SwtWindowImage extends BaseSwtWindowWidget<WindowImage> implements WindowI
     }
 
     @Override
-    public SwtWindowImage setCoordinates(Coordinates coordinates) {
+    public final SwtWindowImage setCoordinates(Coordinates coordinates) {
         this.container.setBounds(SwtConverter.from(coordinates));
         this.container.pack();
         return this;
     }
 
     @Override
-    public WindowImage setVisible(boolean visible) {
+    public final WindowImage setVisible(boolean visible) {
         this.container.setVisible(visible);
         return this;
     }

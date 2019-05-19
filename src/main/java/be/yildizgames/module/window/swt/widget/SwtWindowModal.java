@@ -31,6 +31,9 @@ import be.yildizgames.module.window.widget.WindowModal;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowModal implements WindowModal {
 
     private final MessageBox messageBox;

@@ -31,6 +31,9 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * @author Grégory Van den Borre
+ */
 public class SwtWindowCursor {
 
     private final Cursor cursor;

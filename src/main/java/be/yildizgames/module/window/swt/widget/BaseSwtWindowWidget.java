@@ -26,12 +26,12 @@
 
 package be.yildizgames.module.window.swt.widget;
 
-import be.yildizgames.module.window.widget.WindowButton;
 import be.yildizgames.module.window.widget.WindowWidget;
 import org.eclipse.swt.widgets.Control;
 
 /**
  * @author Grégory Van den Borre
+ *
  * @param <T> Wrapped element to return with chaining.
  */
 abstract class BaseSwtWindowWidget<T extends WindowWidget> implements WindowWidget<T> {

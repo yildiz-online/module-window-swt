@@ -29,6 +29,9 @@ package be.yildizgames.module.window.swt.widget;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 
+/**
+ * @author Grégory Van den Borre
+ */
 public interface SwtImageProvider {
 
     Image getImage(Shell shell, String image);

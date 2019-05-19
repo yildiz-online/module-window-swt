@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Button;
 /**
  * Register a listener on a button to swap the image if the mouse is over the
  * button or not.
+ *
  * @author Van den Borre Grégory
  */
 public class SwtButtonHoverListener {

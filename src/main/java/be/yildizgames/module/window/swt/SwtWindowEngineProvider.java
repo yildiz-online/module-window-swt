@@ -37,4 +37,5 @@ public class SwtWindowEngineProvider implements WindowEngineProvider {
     public BaseWindowEngine getEngine() {
         return new SwtWindowEngine();
     }
+
 }

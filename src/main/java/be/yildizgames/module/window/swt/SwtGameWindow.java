@@ -69,4 +69,5 @@ public final class SwtGameWindow {
     public SwtWindowCanvas getCanvas() {
         return this.canvas;
     }
+
 }

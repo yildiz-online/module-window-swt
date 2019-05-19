@@ -45,7 +45,7 @@ class SwtWindowMenuElement implements WindowMenuElement {
     }
 
     @Override
-    public WindowMenuElement disable() {
+    public final WindowMenuElement disable() {
         this.item.setEnabled(false);
         return this;
     }

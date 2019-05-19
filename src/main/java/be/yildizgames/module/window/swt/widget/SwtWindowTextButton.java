@@ -112,4 +112,5 @@ class SwtWindowTextButton extends SwtWindowButton implements WindowButtonText {
          */
         private boolean hover = false;
     }
+
 }

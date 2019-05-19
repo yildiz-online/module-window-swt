@@ -37,6 +37,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class SwtConverter {
 
+
     private SwtConverter() {
         super();
     }

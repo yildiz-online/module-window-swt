@@ -26,6 +26,8 @@
 
 package be.yildizgames.module.window.swt.widget;
 
+/**
+ * @author Grégory Van den Borre
+ */
 public class SwtWindowShellTest {
-
 }

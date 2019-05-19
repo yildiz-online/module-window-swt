@@ -28,6 +28,9 @@ package be.yildizgames.module.window.swt.widget;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
+/**
+ * @author Grégory Van den Borre
+ */
 @FunctionalInterface
 public interface SelectionBehavior extends SelectionListener {
 

@@ -31,6 +31,9 @@ import org.eclipse.swt.SWT;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtKeyValue {
 
     /**

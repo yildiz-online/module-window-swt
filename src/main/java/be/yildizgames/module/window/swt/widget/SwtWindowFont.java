@@ -36,6 +36,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowFont implements WindowFont {
 
     private static final Map<UUID, SwtWindowFont> fonts = new HashMap<>();

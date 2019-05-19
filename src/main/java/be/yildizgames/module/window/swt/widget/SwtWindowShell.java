@@ -63,6 +63,9 @@ import org.eclipse.swt.widgets.Text;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Grégory Van den Borre
+ */
 public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements WindowShell {
 
     private final Shell shell;

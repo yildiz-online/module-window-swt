@@ -137,7 +137,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     }
 
     @Override
-    public void registerInput(final WindowInputListener listener) {
+    public final void registerInput(final WindowInputListener listener) {
         this.gameWindow.getCanvas().registerInput(listener);
     }
 }

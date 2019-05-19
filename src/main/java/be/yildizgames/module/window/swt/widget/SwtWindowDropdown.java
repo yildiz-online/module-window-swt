@@ -32,6 +32,9 @@ import org.eclipse.swt.widgets.Combo;
 
 import java.util.Arrays;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowDropdown extends BaseSwtWindowWidget<WindowDropdown> implements WindowDropdown {
 
     private final Combo combo;

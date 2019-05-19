@@ -30,6 +30,9 @@ import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.widget.WindowProgressBar;
 import org.eclipse.swt.widgets.ProgressBar;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowProgressBar extends BaseSwtWindowWidget<WindowProgressBar> implements WindowProgressBar {
 
     private final ProgressBar progressBar;

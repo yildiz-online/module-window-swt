@@ -42,24 +42,24 @@ class SwtWindowInputBox extends BaseSwtWindowWidget<WindowInputBox> implements W
     }
 
     @Override
-    public WindowInputBox setCoordinates(Coordinates coordinates) {
+    public final WindowInputBox setCoordinates(Coordinates coordinates) {
         return this;
     }
 
     @Override
-    public WindowInputBox setVisible(boolean visible) {
+    public final WindowInputBox setVisible(boolean visible) {
         this.input.setVisible(visible);
         return this;
     }
 
     @Override
-    public WindowInputBox setText(String text) {
+    public final WindowInputBox setText(String text) {
         this.input.setText(text);
         return this;
     }
 
     @Override
-    public String getText() {
+    public final String getText() {
         return this.input.getText();
     }
 

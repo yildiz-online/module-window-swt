@@ -64,7 +64,7 @@ class SwtWindowModalFile implements WindowModalFile {
     }
 
     @Override
-    public WindowModalFile onOpen(WindowModalFileOpenListener listener) {
+    public final WindowModalFile onOpen(WindowModalFileOpenListener listener) {
         String selected = this.fileDialog.open();
         Optional.ofNullable(selected).ifPresent(s -> listener.open(Paths.get(s)));
         return this;

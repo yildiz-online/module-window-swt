@@ -77,4 +77,5 @@ public class SwtKeyValueTest {
             Assertions.assertEquals(Key.DOWN, v.getKey(SWT.ARROW_DOWN));
         }
     }
+
 }

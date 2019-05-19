@@ -78,7 +78,7 @@ class SwtWindowMenuBar implements WindowMenuBar {
     }
 
     @Override
-    public Optional<WindowMenuElement> getItemById(int id) {
+    public final Optional<WindowMenuElement> getItemById(int id) {
         return Optional.ofNullable(this.items.get(id));
     }
 }

@@ -34,6 +34,7 @@ import java.io.InputStream;
 
 /**
  * Image provider using the classpath to get the content.
+ *
  * @author Grégory Van den Borre
  */
 public class ClasspathImageProvider implements SwtImageProvider {

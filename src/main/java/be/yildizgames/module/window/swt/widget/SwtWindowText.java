@@ -70,13 +70,13 @@ class SwtWindowText extends BaseSwtWindowWidget <WindowTextLine> implements Wind
     }
 
     @Override
-    public WindowTextLine setColor(Color color) {
+    public final WindowTextLine setColor(Color color) {
         //this.label.setForeground();
         return this;
     }
 
     @Override
-    public String getText() {
+    public final String getText() {
         return this.label.getText();
     }
 }

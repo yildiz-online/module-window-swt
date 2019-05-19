@@ -75,7 +75,7 @@ class SwtWindowTextArea extends BaseSwtWindowWidget<WindowTextArea> implements W
     }
 
     @Override
-    public WindowTextArea setForeground(Color color) {
+    public final WindowTextArea setForeground(Color color) {
         this.textArea.setForeground(SwtConverter.from(color));
         return this;
     }

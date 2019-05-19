@@ -39,6 +39,7 @@ import org.eclipse.swt.widgets.Button;
  */
 class SwtWindowButton extends BaseSwtWindowWidget<WindowButton> implements WindowButton {
 
+
     protected final Button button;
 
     SwtWindowButton(Button button) {

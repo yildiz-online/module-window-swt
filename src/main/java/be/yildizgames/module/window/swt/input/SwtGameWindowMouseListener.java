@@ -118,7 +118,7 @@ public final class SwtGameWindowMouseListener extends GameWindowMouseListener im
     }
 
     @Override
-    public void mouseScrolled(final MouseEvent e) {
+    public final void mouseScrolled(final MouseEvent e) {
         this.mouseScrolled(e.count);
     }
 }

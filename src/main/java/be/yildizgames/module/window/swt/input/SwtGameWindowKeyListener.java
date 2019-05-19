@@ -100,4 +100,5 @@ public final class SwtGameWindowKeyListener implements KeyListener {
             this.dispatcher.specialKeyReleased(this.values.getKey(code));
         }
     }
+
 }

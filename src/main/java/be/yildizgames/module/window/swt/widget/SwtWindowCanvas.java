@@ -32,6 +32,9 @@ import be.yildizgames.module.window.swt.input.SwtGameWindowKeyListener;
 import be.yildizgames.module.window.swt.input.SwtGameWindowMouseListener;
 import org.eclipse.swt.widgets.Canvas;
 
+/**
+ * @author Grégory Van den Borre
+ */
 public class SwtWindowCanvas {
 
     private final Canvas canvas;

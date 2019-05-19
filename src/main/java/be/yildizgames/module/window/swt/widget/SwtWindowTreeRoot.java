@@ -35,6 +35,9 @@ import org.eclipse.swt.widgets.TreeItem;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Grégory Van den Borre
+ */
 class SwtWindowTreeRoot implements WindowTreeRoot {
 
     private final Tree tree;
