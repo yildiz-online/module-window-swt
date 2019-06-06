@@ -26,7 +26,6 @@
 
 package be.yildizgames.module.window.swt.widget;
 
-import be.yildizgames.common.file.exception.FileMissingException;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 
@@ -49,7 +48,7 @@ public class ClasspathImageProvider implements SwtImageProvider {
     public final Image getImage(final Shell shell, final String image) {
         InputStream is = this.getClass().getClassLoader().getResourceAsStream(image);
         if (is == null) {
-            throw new FileMissingException("Cannot find image " + image);
+            throw new IllegalStateException("Cannot find image " + image);
         }
         return new Image(shell.getDisplay(), is);
     }
