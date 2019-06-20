@@ -29,7 +29,6 @@ package be.yildizgames.module.window.swt.widget;
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.widget.WindowTextLine;
-import be.yildizgames.module.window.widget.WindowWidget;
 import org.eclipse.swt.widgets.Label;
 
 /**

@@ -30,7 +30,6 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseWheelListener;
-import org.eclipse.swt.widgets.Control;
 
 /**
  * Class for the mouse management. All event are catch here from SWT and then sent to the observer.

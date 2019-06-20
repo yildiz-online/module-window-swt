@@ -313,8 +313,8 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     @Override
     public final ScreenSize getMonitorSize() {
         return new ScreenSize(
-                (int)(shell.getDisplay().getPrimaryMonitor().getBounds().width),
-                (int)(shell.getDisplay().getPrimaryMonitor().getBounds().height));
+                shell.getDisplay().getPrimaryMonitor().getBounds().width,
+                shell.getDisplay().getPrimaryMonitor().getBounds().height);
     }
 
     public final void execute(final Runnable r) {
