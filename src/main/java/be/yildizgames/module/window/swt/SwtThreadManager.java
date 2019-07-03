@@ -21,53 +21,20 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-
 package be.yildizgames.module.window.swt;
 
-import be.yildizgames.module.coordinate.Coordinates;
-import be.yildizgames.module.window.swt.widget.SwtWindowCanvas;
-import be.yildizgames.module.window.swt.widget.SwtWindowShell;
+import be.yildizgames.module.window.WindowThreadManager;
+import org.eclipse.swt.widgets.Display;
 
-/**
- * Game main rendering window.
- *
- * @author Grégory Van den Borre
- * @deprecated Move to engine client (ui addon?)
- */
-@Deprecated(since = "now", forRemoval = true)
-public final class SwtGameWindow {
+public class SwtThreadManager implements WindowThreadManager {
 
-    /**
-     * Canvas for the window and the 3d context.
-     */
-    private SwtWindowCanvas canvas;
-
-    /**
-     * Constructor.
-     */
-    public SwtGameWindow() {
+    SwtThreadManager() {
         super();
     }
 
-    /**
-     * Build the window in the SWT thread.
-     *
-     * @param window Window to use as container.
-     */
-    public void initialize(final SwtWindowShell window, boolean fullScreenMode, Coordinates c) {
-        if (fullScreenMode) {
-            window.setFullScreen();
-        }
-        window.hideCursor();
-        window.setBackground("engine.png");
-        this.canvas = window.createCanvas(c);
-    }
-
-    /**
-     * @return The SWT canvas.
-     */
-    public SwtWindowCanvas getCanvas() {
-        return this.canvas;
+    @Override
+    public void runAsync(Runnable r) {
+        Display.getDefault().asyncExec(r);
     }
 
 }

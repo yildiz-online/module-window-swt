@@ -30,6 +30,7 @@ import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.input.WindowInputListener;
+import be.yildizgames.module.window.swt.widget.SwtWindowCanvas;
 import be.yildizgames.module.window.swt.widget.SwtWindowShell;
 
 /**
@@ -39,12 +40,9 @@ import be.yildizgames.module.window.swt.widget.SwtWindowShell;
  */
 public final class SwtWindowEngine implements BaseWindowEngine {
 
-    /**
-     * SWT game window.
-     */
-    private final SwtGameWindow gameWindow = new SwtGameWindow();
-
     private final SwtWindowShell window;
+
+    private final SwtWindowCanvas canvas;
 
     /**
      * Simple constructor.
@@ -52,9 +50,11 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     SwtWindowEngine() {
         super();
         setGtk();
-        this.window = SwtWindowShell.noClose();//new SwtWindow(new Shell(SWT.NONE));
+        this.window = SwtWindowShell.noClose();
         ScreenSize screenSize = window.getSize();
-        this.gameWindow.initialize(this.window, true, new Coordinates(screenSize.width, screenSize.height, 0, 0));
+        this.window.setFullScreen();
+        this.window.setBackground("engine.png");
+        this.canvas = this.window.createCanvas( new Coordinates(screenSize.width, screenSize.height, 0, 0));
         this.hideCursor();
         this.window.execute(this.window::open);
     }
@@ -66,7 +66,8 @@ public final class SwtWindowEngine implements BaseWindowEngine {
         super();
         setGtk();
         this.window = window;
-        this.gameWindow.initialize(this.window, false, c);
+        this.window.setBackground("engine.png");
+        this.canvas = this.window.createCanvas(c);
         this.hideCursor();
         this.window.execute(this.window::open);
     }
@@ -100,7 +101,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
      * @return The handle to link the game window and the 3d context.
      */
     public final WindowHandle getHandle() {
-        return this.gameWindow.getCanvas().getHandle();
+        return this.canvas.getHandle();
     }
 
     /**
@@ -133,6 +134,6 @@ public final class SwtWindowEngine implements BaseWindowEngine {
 
     @Override
     public final void registerInput(final WindowInputListener listener) {
-        this.gameWindow.getCanvas().registerInput(listener);
+        this.canvas.registerInput(listener);
     }
 }

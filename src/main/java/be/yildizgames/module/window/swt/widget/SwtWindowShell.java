@@ -34,6 +34,8 @@ import be.yildizgames.module.window.widget.WindowButtonText;
 import be.yildizgames.module.window.widget.WindowDropdown;
 import be.yildizgames.module.window.widget.WindowFont;
 import be.yildizgames.module.window.widget.WindowImage;
+import be.yildizgames.module.window.widget.WindowImageProvider;
+import be.yildizgames.module.window.widget.WindowImageProviderClassPath;
 import be.yildizgames.module.window.widget.WindowInputBox;
 import be.yildizgames.module.window.widget.WindowMenuBar;
 import be.yildizgames.module.window.widget.WindowMenuBarElementDefinition;
@@ -70,7 +72,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
 
     private final Shell shell;
 
-    private final SwtImageProvider imageProvider;
+    private final WindowImageProvider imageProvider;
 
     private final Map<Cursor, SwtWindowCursor> cursorList = new HashMap<>();
 
@@ -81,8 +83,9 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
      */
     private final Cursor invisibleCursor;
 
-    private SwtWindowShell(final Shell shell, SwtImageProvider imageProvider) {
+    private SwtWindowShell(final Shell shell, WindowImageProvider imageProvider) {
         super(shell);
+        System.setProperty("SWT_GTK3", "0");
         this.imageProvider = imageProvider;
         this.shell = shell;
         this.shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
@@ -96,18 +99,18 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     }
 
     public static SwtWindowShell noClose() {
-        return noClose(new ClasspathImageProvider());
+        return noClose(new WindowImageProviderClassPath());
     }
 
-    public static SwtWindowShell noClose(SwtImageProvider imageProvider) {
+    public static SwtWindowShell noClose(WindowImageProvider imageProvider) {
         return new SwtWindowShell(new Shell(Display.getCurrent(), SWT.NO_TRIM | SWT.TRANSPARENT), imageProvider);
     }
 
     public static SwtWindowShell withClose() {
-        return withClose(new ClasspathImageProvider());
+        return withClose(new WindowImageProviderClassPath());
     }
 
-    public static SwtWindowShell withClose(SwtImageProvider imageProvider) {
+    public static SwtWindowShell withClose(WindowImageProvider imageProvider) {
         return new SwtWindowShell(new Shell(Display.getCurrent(), SWT.CLOSE | SWT.TRANSPARENT), imageProvider);
     }
 
@@ -176,7 +179,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     @Override
     public WindowImage createImage(String image) {
         Label label = new Label(this.shell, SWT.NONE);
-        Image i = this.imageProvider.getImage(this.shell, image);
+        Image i = new Image(this.shell.getDisplay(), this.imageProvider.getImage(image));
         return new SwtWindowImage(label, i);
     }
 
@@ -205,7 +208,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
 
     @Override
     public SwtWindowShell setIcon(String file) {
-        this.shell.setImage(this.imageProvider.getImage(this.shell, file));
+        this.shell.setImage(new Image(this.shell.getDisplay(), this.imageProvider.getImage(file)));
         return this;
     }
 
@@ -216,8 +219,8 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
 
     @Override
     public SwtWindowButton createButton(String background, String hover) {
-        Image backgroundImage = this.imageProvider.getImage(this.shell, background);
-        Image hoverImage = this.imageProvider.getImage(this.shell, hover);
+        Image backgroundImage = new Image(this.shell.getDisplay(), this.imageProvider.getImage(background));
+        Image hoverImage = new Image(this.shell.getDisplay(), this.imageProvider.getImage(hover));
         Button button = new Button(this.shell, SWT.SMOOTH);
         button.setImage(backgroundImage);
         button.addListener(SWT.MouseEnter, e -> button.setImage(hoverImage));
@@ -234,7 +237,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     @Override
     public final WindowShell setBackground(String background) {
         this.shell.setBackgroundMode(SWT.INHERIT_DEFAULT);
-        Image tmpImage = this.imageProvider.getImage(this.shell, background);
+        Image tmpImage = new Image(this.shell.getDisplay(), this.imageProvider.getImage(background));
         Image backgroundImage = new Image(this.shell.getDisplay(), tmpImage.getImageData().scaledTo(this.shell.getBounds().width, this.shell.getBounds().height));
         this.shell.setBackgroundImage(backgroundImage);
         return this;
@@ -327,7 +330,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     }
 
     public Cursor createCursor(Cursor cursor) {
-        final Image image = this.imageProvider.getImage(this.shell, cursor.getPath());
+        final Image image = new Image(this.shell.getDisplay(), this.imageProvider.getImage(cursor.getPath()));
         this.cursorList.put(cursor, new SwtWindowCursor(image.getImageData(), cursor.getX(), cursor.getY()));
         return cursor;
     }
