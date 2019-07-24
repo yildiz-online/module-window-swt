@@ -32,6 +32,7 @@ import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.input.WindowInputListener;
 import be.yildizgames.module.window.swt.widget.SwtWindowCanvas;
 import be.yildizgames.module.window.swt.widget.SwtWindowShell;
+import be.yildizgames.module.window.widget.WindowShell;
 
 /**
  * SWT implementation for the window engine.
@@ -85,6 +86,11 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     @Override
     public final void setWindowIcon(final String file) {
         this.window.setIcon(file);
+    }
+
+    @Override
+    public WindowShell createShell() {
+        return null;
     }
 
     @Override

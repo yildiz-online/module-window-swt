@@ -103,7 +103,7 @@ class SwtWindowTextButton extends SwtWindowButton implements WindowButtonText {
     /**
      * Simple wrapper to be used in anonymous class.
      *
-     * @author Van den Borre Grégory
+     * @author Grégory Van den Borre
      */
     private final class ButtonHover {
 
