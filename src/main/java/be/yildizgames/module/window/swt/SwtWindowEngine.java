@@ -100,7 +100,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     }
 
     @Override
-    public WindowShellFactory getWindowShellFactory() {
+    public final WindowShellFactory getWindowShellFactory() {
         return this.windowShellFactory;
     }
 
