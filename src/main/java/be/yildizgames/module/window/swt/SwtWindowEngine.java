@@ -49,6 +49,8 @@ public final class SwtWindowEngine implements BaseWindowEngine {
 
     private final WindowShellFactory windowShellFactory = new SwtWindowShellFactory();
 
+    private final WindowThreadManager threadManager = new SwtThreadManager();
+
     /**
      * Simple constructor.
      */
@@ -83,7 +85,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
 
     @Override
     public final WindowThreadManager getThreadManager() {
-        return new SwtThreadManager();
+        return threadManager;
     }
 
 
