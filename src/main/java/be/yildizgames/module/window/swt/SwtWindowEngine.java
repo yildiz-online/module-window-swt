@@ -29,10 +29,12 @@ import be.yildizgames.module.window.BaseWindowEngine;
 import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.WindowHandle;
+import be.yildizgames.module.window.WindowThreadManager;
 import be.yildizgames.module.window.input.WindowInputListener;
 import be.yildizgames.module.window.swt.widget.SwtWindowCanvas;
 import be.yildizgames.module.window.swt.widget.SwtWindowShell;
-import be.yildizgames.module.window.widget.WindowShell;
+import be.yildizgames.module.window.swt.widget.SwtWindowShellFactory;
+import be.yildizgames.module.window.widget.WindowShellFactory;
 
 /**
  * SWT implementation for the window engine.
@@ -44,6 +46,8 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     private final SwtWindowShell window;
 
     private final SwtWindowCanvas canvas;
+
+    private final WindowShellFactory windowShellFactory = new SwtWindowShellFactory();
 
     /**
      * Simple constructor.
@@ -77,6 +81,11 @@ public final class SwtWindowEngine implements BaseWindowEngine {
         System.setProperty("SWT_GTK3", "0");
     }
 
+    @Override
+    public final WindowThreadManager getThreadManager() {
+        return new SwtThreadManager();
+    }
+
 
     @Override
     public final void setWindowTitle(final String title) {
@@ -89,8 +98,8 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     }
 
     @Override
-    public WindowShell createShell() {
-        return null;
+    public WindowShellFactory getWindowShellFactory() {
+        return this.windowShellFactory;
     }
 
     @Override
