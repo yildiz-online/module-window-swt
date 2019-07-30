@@ -26,6 +26,9 @@
 
 package be.yildizgames.module.window.swt.widget;
 
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
+import be.yildizgames.module.window.widget.WindowButton;
 import be.yildizgames.module.window.widget.WindowWidget;
 import org.eclipse.swt.widgets.Control;
 

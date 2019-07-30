@@ -28,6 +28,8 @@ package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.widget.WindowButtonText;
@@ -179,8 +181,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     @Override
     public WindowImage createImage(String image) {
         Label label = new Label(this.shell, SWT.NONE);
-        Image i = new Image(this.shell.getDisplay(), this.imageProvider.getImage(image));
-        return new SwtWindowImage(label, i);
+        return new SwtWindowImage(label, this.imageProvider, image);
     }
 
     @Override
@@ -252,6 +253,18 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     @Override
     public WindowShell setVisible(boolean visible) {
         this.shell.setVisible(visible);
+        return this;
+    }
+
+    @Override
+    public final WindowShell setSize(Size size) {
+        this.shell.setSize(size.width, size.height);
+        return this;
+    }
+
+    @Override
+    public final WindowShell setPosition(Position position) {
+        this.shell.setLocation(position.left, position.top);
         return this;
     }
 

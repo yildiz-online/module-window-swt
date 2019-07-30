@@ -27,6 +27,8 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.widget.WindowProgressBar;
 import org.eclipse.swt.widgets.ProgressBar;
 
@@ -58,6 +60,18 @@ class SwtWindowProgressBar extends BaseSwtWindowWidget<WindowProgressBar> implem
     @Override
     public final WindowProgressBar setCoordinates(Coordinates coordinates) {
         this.progressBar.setBounds(SwtConverter.from(coordinates));
+        return this;
+    }
+
+    @Override
+    public final WindowProgressBar setSize(Size size) {
+        this.progressBar.setSize(size.width, size.height);
+        return this;
+    }
+
+    @Override
+    public final WindowProgressBar setPosition(Position position) {
+        this.progressBar.setLocation(position.left, position.top);
         return this;
     }
 }

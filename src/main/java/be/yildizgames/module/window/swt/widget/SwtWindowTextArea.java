@@ -28,7 +28,10 @@ package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.widget.WindowFont;
+import be.yildizgames.module.window.widget.WindowProgressBar;
 import be.yildizgames.module.window.widget.WindowTextArea;
 import org.eclipse.swt.widgets.Text;
 
@@ -77,6 +80,18 @@ class SwtWindowTextArea extends BaseSwtWindowWidget<WindowTextArea> implements W
     @Override
     public final WindowTextArea setForeground(Color color) {
         this.textArea.setForeground(SwtConverter.from(color));
+        return this;
+    }
+
+    @Override
+    public final WindowTextArea setSize(Size size) {
+        this.textArea.setSize(size.width, size.height);
+        return this;
+    }
+
+    @Override
+    public final WindowTextArea setPosition(Position position) {
+        this.textArea.setLocation(position.left, position.top);
         return this;
     }
 }

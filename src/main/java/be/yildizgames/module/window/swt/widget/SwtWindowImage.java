@@ -28,7 +28,10 @@ package be.yildizgames.module.window.swt.widget;
 
 
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.widget.WindowImage;
+import be.yildizgames.module.window.widget.WindowImageProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Label;
 
@@ -39,10 +42,13 @@ class SwtWindowImage extends BaseSwtWindowWidget<WindowImage> implements WindowI
 
     private final Label container;
 
-    SwtWindowImage(Label container, Image image) {
+    private final WindowImageProvider provider;
+
+    SwtWindowImage(Label container, WindowImageProvider provider, String image) {
         super(container);
         this.container = container;
-        this.container.setImage(image);
+        this.provider = provider;
+        this.container.setImage(new Image(this.container.getDisplay(), provider.getImage(image)));
     }
 
     @Override
@@ -55,6 +61,24 @@ class SwtWindowImage extends BaseSwtWindowWidget<WindowImage> implements WindowI
     @Override
     public final WindowImage setVisible(boolean visible) {
         this.container.setVisible(visible);
+        return this;
+    }
+
+    @Override
+    public final WindowImage setSize(Size size) {
+        this.container.setSize(size.width, size.height);
+        return this;
+    }
+
+    @Override
+    public final WindowImage setPosition(Position position) {
+        this.container.setLocation(position.left, position.top);
+        return this;
+    }
+
+    @Override
+    public WindowImage setImage(String url) {
+        this.container.setImage(new Image(this.container.getDisplay(), provider.getImage(url)));
         return this;
     }
 }

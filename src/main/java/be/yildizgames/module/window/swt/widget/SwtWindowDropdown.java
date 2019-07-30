@@ -27,6 +27,8 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.widget.WindowDropdown;
 import org.eclipse.swt.widgets.Combo;
 
@@ -45,14 +47,26 @@ class SwtWindowDropdown extends BaseSwtWindowWidget<WindowDropdown> implements W
     }
 
     @Override
-    public final WindowDropdown setCoordinates(Coordinates coordinates) {
-        this.combo.setBounds(SwtConverter.from(coordinates));
+    public final WindowDropdown setVisible(boolean visible) {
+        this.combo.setVisible(visible);
         return this;
     }
 
     @Override
-    public final WindowDropdown setVisible(boolean visible) {
-        this.combo.setVisible(visible);
+    public final WindowDropdown setSize(Size size) {
+        this.combo.setSize(size.width, size.height);
+        return this;
+    }
+
+    @Override
+    public final WindowDropdown setPosition(Position position) {
+        this.combo.setLocation(position.left, position.top);
+        return this;
+    }
+
+    @Override
+    public final WindowDropdown setCoordinates(Coordinates coordinates) {
+        this.combo.setBounds(SwtConverter.from(coordinates));
         return this;
     }
 

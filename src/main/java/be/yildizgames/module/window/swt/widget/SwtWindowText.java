@@ -28,6 +28,9 @@ package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
+import be.yildizgames.module.window.widget.WindowProgressBar;
 import be.yildizgames.module.window.widget.WindowTextLine;
 import org.eclipse.swt.widgets.Label;
 
@@ -77,5 +80,17 @@ class SwtWindowText extends BaseSwtWindowWidget <WindowTextLine> implements Wind
     @Override
     public final String getText() {
         return this.label.getText();
+    }
+
+    @Override
+    public final WindowTextLine setSize(Size size) {
+        this.label.setSize(size.width, size.height);
+        return this;
+    }
+
+    @Override
+    public final WindowTextLine setPosition(Position position) {
+        this.label.setLocation(position.left, position.top);
+        return this;
     }
 }

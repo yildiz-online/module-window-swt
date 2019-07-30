@@ -1,23 +1,14 @@
 package be.yildizgames.module.window.swt.widget;
 
-import be.yildizgames.module.window.widget.WindowImageProvider;
 import be.yildizgames.module.window.widget.WindowShell;
 import be.yildizgames.module.window.widget.WindowShellFactory;
+import be.yildizgames.module.window.widget.WindowShellOptions;
 
 public class SwtWindowShellFactory implements WindowShellFactory {
 
     @Override
-    public WindowShell buildShell() {
+    public WindowShell buildShell(WindowShellOptions... options) {
         return SwtWindowShell.withClose();
     }
 
-    @Override
-    public WindowShell buildShellWithClose() {
-        return SwtWindowShell.withClose();
-    }
-
-    @Override
-    public WindowShell buildShellNoClose(WindowImageProvider provider) {
-        return SwtWindowShell.noClose(provider);
-    }
 }

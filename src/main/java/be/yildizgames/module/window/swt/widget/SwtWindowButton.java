@@ -27,6 +27,8 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.input.MouseLeftClickListener;
 import be.yildizgames.module.window.widget.WindowButton;
 import org.eclipse.swt.SWT;
@@ -56,6 +58,18 @@ class SwtWindowButton extends BaseSwtWindowWidget<WindowButton> implements Windo
     @Override
     public WindowButton setCoordinates(Coordinates coordinates) {
         this.button.setBounds(SwtConverter.from(coordinates));
+        return this;
+    }
+
+    @Override
+    public WindowButton setSize(Size size) {
+        this.button.setSize(size.width, size.height);
+        return this;
+    }
+
+    @Override
+    public WindowButton setPosition(Position position) {
+        this.button.setLocation(position.left, position.top);
         return this;
     }
 
