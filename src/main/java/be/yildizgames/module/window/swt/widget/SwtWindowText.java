@@ -30,7 +30,6 @@ import be.yildizgames.module.color.Color;
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
-import be.yildizgames.module.window.widget.WindowProgressBar;
 import be.yildizgames.module.window.widget.WindowTextLine;
 import org.eclipse.swt.widgets.Label;
 
@@ -80,6 +79,12 @@ class SwtWindowText extends BaseSwtWindowWidget <WindowTextLine> implements Wind
     @Override
     public final String getText() {
         return this.label.getText();
+    }
+
+    @Override
+    public WindowTextLine setUnderline(boolean active) {
+        //TODO implements
+        return this;
     }
 
     @Override
