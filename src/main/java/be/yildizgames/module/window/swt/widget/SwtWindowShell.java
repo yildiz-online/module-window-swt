@@ -32,13 +32,16 @@ import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
+import be.yildizgames.module.window.input.KeyboardListener;
 import be.yildizgames.module.window.widget.WindowButtonText;
+import be.yildizgames.module.window.widget.WindowCanvas;
 import be.yildizgames.module.window.widget.WindowDropdown;
 import be.yildizgames.module.window.widget.WindowFont;
 import be.yildizgames.module.window.widget.WindowImage;
 import be.yildizgames.module.window.widget.WindowImageProvider;
 import be.yildizgames.module.window.widget.WindowImageProviderClassPath;
 import be.yildizgames.module.window.widget.WindowInputBox;
+import be.yildizgames.module.window.widget.WindowMediaPlayer;
 import be.yildizgames.module.window.widget.WindowMenuBar;
 import be.yildizgames.module.window.widget.WindowMenuBarElementDefinition;
 import be.yildizgames.module.window.widget.WindowModalFile;
@@ -306,6 +309,30 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     @Override
     public WindowFont createFont(String path, int height) {
         return new SwtWindowFont(this.shell,path, height);
+    }
+
+    @Override
+    public WindowCanvas createCanvas() {
+        //FIXME implements
+        return new SwtWindowCanvas(null);
+    }
+
+    @Override
+    public WindowShell addKeyListener(KeyboardListener listener) {
+        //FIXME implements
+        return null;
+    }
+
+    @Override
+    public WindowShell toBack() {
+        //FIXME implements
+        return null;
+    }
+
+    @Override
+    public WindowMediaPlayer createMediaPlayer() {
+        //FIXME implements
+        return null;
     }
 
     /**

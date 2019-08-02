@@ -26,6 +26,9 @@
 
 package be.yildizgames.module.window.swt.widget;
 
+import be.yildizgames.module.coordinate.Coordinates;
+import be.yildizgames.module.coordinate.Position;
+import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.widget.WindowCanvas;
 import be.yildizgames.module.window.input.WindowInputListener;
@@ -57,5 +60,23 @@ public class SwtWindowCanvas implements WindowCanvas {
 
     public final WindowHandle getHandle() {
         return new WindowHandle(this.canvas.handle);
+    }
+
+    @Override
+    public WindowCanvas setCoordinates(Coordinates coordinates) {
+        //FIXME implements
+        return null;
+    }
+
+    @Override
+    public WindowCanvas setSize(Size size) {
+        //FIXME implements
+        return null;
+    }
+
+    @Override
+    public WindowCanvas setPosition(Position position) {
+        //FIXME implements
+        return null;
     }
 }
