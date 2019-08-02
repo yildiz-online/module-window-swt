@@ -27,6 +27,7 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.window.WindowHandle;
+import be.yildizgames.module.window.widget.WindowCanvas;
 import be.yildizgames.module.window.input.WindowInputListener;
 import be.yildizgames.module.window.swt.input.SwtGameWindowKeyListener;
 import be.yildizgames.module.window.swt.input.SwtGameWindowMouseListener;
@@ -35,7 +36,7 @@ import org.eclipse.swt.widgets.Canvas;
 /**
  * @author Grégory Van den Borre
  */
-public class SwtWindowCanvas {
+public class SwtWindowCanvas implements WindowCanvas {
 
     private final Canvas canvas;
 
