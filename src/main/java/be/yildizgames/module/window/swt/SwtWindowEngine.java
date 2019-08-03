@@ -43,6 +43,8 @@ import be.yildizgames.module.window.widget.WindowShellFactory;
  */
 public final class SwtWindowEngine implements BaseWindowEngine {
 
+    private final System.Logger logger = System.getLogger(SwtWindowEngine.class.getName());
+
     private final SwtWindowShell window;
 
     private final SwtWindowCanvas canvas;
@@ -56,6 +58,8 @@ public final class SwtWindowEngine implements BaseWindowEngine {
      */
     SwtWindowEngine() {
         super();
+        this.logger.log(System.Logger.Level.INFO, "Window Engine SWT implementation initializing...");
+        this.logger.log(System.Logger.Level.INFO, "Window Engine SWT implementation initialized.");
         setGtk();
         this.window = SwtWindowShell.noClose();
         ScreenSize screenSize = window.getSize();
@@ -71,6 +75,8 @@ public final class SwtWindowEngine implements BaseWindowEngine {
      */
     public SwtWindowEngine(SwtWindowShell window, Coordinates c) {
         super();
+        this.logger.log(System.Logger.Level.INFO, "Window Engine SWT implementation initializing...");
+        this.logger.log(System.Logger.Level.INFO, "Window Engine SWT implementation initialized.");
         setGtk();
         this.window = window;
         this.window.setBackground("engine.png");
