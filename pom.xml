@@ -53,6 +53,7 @@
 
   <properties>
     <dependency.swt.version>3.111.0</dependency.swt.version>
+    <java.version>11</java.version>
   </properties>
 
   <dependencies>
