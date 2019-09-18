@@ -27,6 +27,7 @@
 package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.color.Color;
+import be.yildizgames.module.coordinate.BaseCoordinate;
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
@@ -333,6 +334,11 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     public WindowMediaPlayer createMediaPlayer() {
         //FIXME implements
         return null;
+    }
+
+    @Override
+    public BaseCoordinate getCoordinates() {
+        return new Coordinates(this.shell.getSize().x, this.shell.getSize().y, this.shell.getLocation().x, this.shell.getLocation().y);
     }
 
     /**
