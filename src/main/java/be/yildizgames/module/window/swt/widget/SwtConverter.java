@@ -50,6 +50,6 @@ public class SwtConverter {
         if(c.equals(Color.WHITE)) {
             return Display.getCurrent().getSystemColor(SWT.COLOR_WHITE);
         }
-        return new org.eclipse.swt.graphics.Color(Display.getCurrent(), c.red, c.green, c.blue);
+        return new org.eclipse.swt.graphics.Color(Display.getCurrent(), c.redValue, c.greenValue, c.blueValue);
     }
 }
