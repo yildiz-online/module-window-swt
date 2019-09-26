@@ -31,7 +31,6 @@ import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.widget.WindowFont;
-import be.yildizgames.module.window.widget.WindowProgressBar;
 import be.yildizgames.module.window.widget.WindowTextArea;
 import org.eclipse.swt.widgets.Text;
 
