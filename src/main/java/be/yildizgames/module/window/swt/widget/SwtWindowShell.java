@@ -50,6 +50,7 @@ import be.yildizgames.module.window.widget.WindowShell;
 import be.yildizgames.module.window.widget.WindowTextArea;
 import be.yildizgames.module.window.widget.WindowTreeElement;
 import be.yildizgames.module.window.widget.WindowTreeRoot;
+import be.yildizgames.module.window.widget.WindowNotification;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -404,5 +405,10 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
         Canvas canvas = new Canvas(shell, SWT.NONE);
         canvas.setBounds(coordinates.left, coordinates.top, coordinates.width, coordinates.height);
         return new SwtWindowCanvas(canvas);
+    }
+    
+        @Override
+    public final WindowNotification createNotification() {
+        return null;
     }
 }
