@@ -33,7 +33,10 @@ import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.Cursor;
 import be.yildizgames.module.window.ScreenSize;
+import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.input.KeyboardListener;
+import be.yildizgames.module.window.input.MouseOverListener;
+import be.yildizgames.module.window.widget.OnMinimize;
 import be.yildizgames.module.window.widget.WindowButtonText;
 import be.yildizgames.module.window.widget.WindowCanvas;
 import be.yildizgames.module.window.widget.WindowDropdown;
@@ -46,11 +49,13 @@ import be.yildizgames.module.window.widget.WindowMediaPlayer;
 import be.yildizgames.module.window.widget.WindowMenuBar;
 import be.yildizgames.module.window.widget.WindowMenuBarElementDefinition;
 import be.yildizgames.module.window.widget.WindowModalFile;
+import be.yildizgames.module.window.widget.WindowNotification;
+import be.yildizgames.module.window.widget.WindowPopup;
 import be.yildizgames.module.window.widget.WindowShell;
+import be.yildizgames.module.window.widget.WindowShellOptions;
 import be.yildizgames.module.window.widget.WindowTextArea;
 import be.yildizgames.module.window.widget.WindowTreeElement;
 import be.yildizgames.module.window.widget.WindowTreeRoot;
-import be.yildizgames.module.window.widget.WindowNotification;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -262,6 +267,11 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     }
 
     @Override
+    public WindowShell addOnMouseOverListener(MouseOverListener l) {
+        return null;
+    }
+
+    @Override
     public final WindowShell setSize(Size size) {
         this.shell.setSize(size.width, size.height);
         return this;
@@ -271,6 +281,11 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     public final WindowShell setPosition(Position position) {
         this.shell.setLocation(position.left, position.top);
         return this;
+    }
+
+    @Override
+    public WindowShell setPosition(int left, int top) {
+        return null;
     }
 
     @Override
@@ -294,9 +309,11 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     }
 
     @Override
-    public WindowShell createChildWindow() {
+    public WindowShell createChildWindow(WindowShellOptions... windowShellOptions) {
+        //FIXME options ignored
         return new SwtWindowShell(new Shell(this.shell), this.imageProvider);
     }
+
 
     @Override
     public WindowMenuBar createMenuBar(WindowMenuBarElementDefinition... elements) {
@@ -320,21 +337,59 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     }
 
     @Override
+    public WindowPopup createPopup() {
+        return null;
+    }
+
+    @Override
     public WindowShell addKeyListener(KeyboardListener listener) {
         //FIXME implements
-        return null;
+        return this;
     }
 
     @Override
     public WindowShell toBack() {
         //FIXME implements
-        return null;
+        return this;
+    }
+
+    @Override
+    public WindowShell minimize(OnMinimize... minimizes) {
+        //FIXME implements
+        return this;
+    }
+
+    @Override
+    public WindowShell maximize() {
+        //FIXME implements
+        return this;
     }
 
     @Override
     public WindowMediaPlayer createMediaPlayer() {
         //FIXME implements
         return null;
+    }
+
+    @Override
+    public void exit() {
+        //FIXME implements
+    }
+
+    @Override
+    public void requestFocus() {
+        //FIXME implements
+    }
+
+    @Override
+    public WindowHandle getHandle() {
+        return null;
+    }
+
+    @Override
+    public WindowShell toFront() {
+        //FIXME implements
+        return this;
     }
 
     @Override
