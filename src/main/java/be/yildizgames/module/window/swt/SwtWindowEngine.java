@@ -27,6 +27,7 @@ package be.yildizgames.module.window.swt;
 import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.window.BaseWindowEngine;
 import be.yildizgames.module.window.Cursor;
+import be.yildizgames.module.window.RegisteredView;
 import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.WindowThreadManager;
@@ -34,7 +35,11 @@ import be.yildizgames.module.window.input.WindowInputListener;
 import be.yildizgames.module.window.swt.widget.SwtWindowCanvas;
 import be.yildizgames.module.window.swt.widget.SwtWindowShell;
 import be.yildizgames.module.window.swt.widget.SwtWindowShellFactory;
-import be.yildizgames.module.window.widget.WindowShellFactory;
+import be.yildizgames.module.window.widget.WindowImageProvider;
+import be.yildizgames.module.window.widget.WindowImageProviderClassPath;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SWT implementation for the window engine.
@@ -49,9 +54,13 @@ public final class SwtWindowEngine implements BaseWindowEngine {
 
     private final SwtWindowCanvas canvas;
 
-    private final WindowShellFactory windowShellFactory = new SwtWindowShellFactory();
-
     private final WindowThreadManager threadManager = new SwtThreadManager();
+
+    private final List<RegisteredView> views = new ArrayList<>();
+
+    private final WindowImageProvider imageProvider;
+
+    private boolean started;
 
     /**
      * Simple constructor.
@@ -68,6 +77,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
         this.canvas = this.window.createCanvas( new Coordinates(screenSize.width, screenSize.height, 0, 0));
         this.hideCursor();
         this.window.execute(this.window::open);
+        this.imageProvider = new WindowImageProviderClassPath();
     }
 
     /**
@@ -83,6 +93,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
         this.canvas = this.window.createCanvas(c);
         this.hideCursor();
         this.window.execute(this.window::open);
+        this.imageProvider = new WindowImageProviderClassPath();
     }
 
     private static void setGtk() {
@@ -92,6 +103,11 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     @Override
     public final WindowThreadManager getThreadManager() {
         return threadManager;
+    }
+
+    @Override
+    public void registerView(RegisteredView registeredView) {
+        this.views.add(registeredView);
     }
 
 
@@ -106,17 +122,19 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     }
 
     @Override
-    public final WindowShellFactory getWindowShellFactory() {
-        return this.windowShellFactory;
-    }
-
-    @Override
     public final Cursor createCursor(final Cursor cursor) {
         return this.window.createCursor(cursor);
     }
 
     @Override
     public final void update() {
+        if(!started) {
+            SwtWindowShellFactory factory = new SwtWindowShellFactory();
+            for(RegisteredView view : views) {
+                view.build(factory);
+            }
+            started = true;
+        }
         this.window.checkForEvent();
     }
 
