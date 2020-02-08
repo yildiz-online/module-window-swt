@@ -300,7 +300,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
 
     @Override
     public WindowButtonText createTextButton() {
-        return new SwtWindowTextButton(new Button(this.shell, SWT.SMOOTH));
+        return new SwtWindowTextButton(new Button(this.shell, SWT.SMOOTH), imageProvider);
     }
 
     @Override
