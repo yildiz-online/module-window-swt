@@ -196,7 +196,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
 
     @Override
     public SwtWindowButton createButton() {
-        return new SwtWindowButton(new Button(this.shell, SWT.SMOOTH));
+        return new SwtWindowButton(new Button(this.shell, SWT.SMOOTH), this.imageProvider);
     }
 
     @Override
@@ -236,7 +236,7 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
         button.setImage(backgroundImage);
         button.addListener(SWT.MouseEnter, e -> button.setImage(hoverImage));
         button.addListener(SWT.MouseExit, e -> button.setImage(backgroundImage));
-        return new SwtWindowButton(button);
+        return new SwtWindowButton(button, this.imageProvider);
     }
 
     @Override

@@ -31,10 +31,13 @@ import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.input.MouseLeftClickListener;
 import be.yildizgames.module.window.widget.WindowButton;
+import be.yildizgames.module.window.widget.WindowImageProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * @author Grégory Van den Borre
@@ -44,9 +47,12 @@ class SwtWindowButton extends BaseSwtWindowWidget<WindowButton> implements Windo
 
     protected final Button button;
 
-    SwtWindowButton(Button button) {
+    private final WindowImageProvider imageProvider;
+
+    SwtWindowButton(Button button, WindowImageProvider imageProvider) {
         super(button);
         this.button = button;
+        this.imageProvider = imageProvider;
     }
 
     @Override
@@ -83,6 +89,12 @@ class SwtWindowButton extends BaseSwtWindowWidget<WindowButton> implements Windo
                 }
             }
         });
+        return this;
+    }
+
+    @Override
+    public final WindowButton setBackground(String image) {
+        this.button.setImage(new Image(Display.getCurrent(), this.imageProvider.getImage(image)));
         return this;
     }
 }
