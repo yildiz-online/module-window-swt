@@ -28,6 +28,7 @@ package be.yildizgames.module.window.swt.widget;
 
 import be.yildizgames.module.color.Color;
 import be.yildizgames.module.window.widget.WindowButtonText;
+import be.yildizgames.module.window.widget.WindowImageProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseTrackListener;
@@ -53,8 +54,8 @@ class SwtWindowTextButton extends SwtWindowButton implements WindowButtonText {
 
     private Color fontColor = Color.BLACK;
 
-    SwtWindowTextButton(Button button) {
-        super(button);
+    SwtWindowTextButton(Button button, WindowImageProvider imageProvider) {
+        super(button, imageProvider);
         this.bh = new ButtonHover();
         this.button.addMouseTrackListener(new MouseTrackListener() {
             @Override
