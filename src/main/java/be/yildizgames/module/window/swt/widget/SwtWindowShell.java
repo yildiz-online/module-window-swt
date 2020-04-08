@@ -36,9 +36,11 @@ import be.yildizgames.module.window.ScreenSize;
 import be.yildizgames.module.window.WindowHandle;
 import be.yildizgames.module.window.input.KeyboardListener;
 import be.yildizgames.module.window.input.MouseOverListener;
+import be.yildizgames.module.window.widget.DirectoryChooser;
 import be.yildizgames.module.window.widget.OnMinimize;
 import be.yildizgames.module.window.widget.WindowButtonText;
 import be.yildizgames.module.window.widget.WindowCanvas;
+import be.yildizgames.module.window.widget.WindowCheckBox;
 import be.yildizgames.module.window.widget.WindowDropdown;
 import be.yildizgames.module.window.widget.WindowFont;
 import be.yildizgames.module.window.widget.WindowImage;
@@ -342,6 +344,11 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     }
 
     @Override
+    public WindowCheckBox createCheckBox() {
+        return null;
+    }
+
+    @Override
     public WindowShell addKeyListener(KeyboardListener listener) {
         //FIXME implements
         return this;
@@ -368,6 +375,11 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     @Override
     public WindowMediaPlayer createMediaPlayer() {
         //FIXME implements
+        return null;
+    }
+
+    @Override
+    public DirectoryChooser createDirectoryChooser() {
         return null;
     }
 
