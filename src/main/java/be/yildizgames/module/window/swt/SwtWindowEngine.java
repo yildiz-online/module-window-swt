@@ -106,19 +106,22 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     }
 
     @Override
-    public void registerView(RegisteredView registeredView) {
+    public final SwtWindowEngine registerView(RegisteredView registeredView) {
         this.views.add(registeredView);
+        return this;
     }
 
 
     @Override
-    public final void setWindowTitle(final String title) {
+    public final SwtWindowEngine setWindowTitle(final String title) {
         this.window.setTitle(title);
+        return this;
     }
 
     @Override
-    public final void setWindowIcon(final String file) {
+    public final SwtWindowEngine setWindowIcon(final String file) {
         this.window.setIcon(file);
+        return this;
     }
 
     @Override
@@ -127,7 +130,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     }
 
     @Override
-    public final void update() {
+    public final SwtWindowEngine update() {
         if(!started) {
             SwtWindowShellFactory factory = new SwtWindowShellFactory();
             for(RegisteredView view : views) {
@@ -136,6 +139,7 @@ public final class SwtWindowEngine implements BaseWindowEngine {
             started = true;
         }
         this.window.checkForEvent();
+        return this;
     }
 
     /**
@@ -149,23 +153,27 @@ public final class SwtWindowEngine implements BaseWindowEngine {
      * Delete the resources used during loading.
      */
     @Override
-    public final void deleteLoadingResources() {
+    public final SwtWindowEngine deleteLoadingResources() {
         this.window.showCursor();
+        return this;
     }
 
     @Override
-    public final void setCursor(final Cursor cursor) {
+    public final SwtWindowEngine setCursor(final Cursor cursor) {
         this.window.setCursor(cursor);
+        return this;
     }
 
     @Override
-    public final void showCursor() {
+    public final SwtWindowEngine showCursor() {
         this.window.showCursor();
+        return this;
     }
 
     @Override
-    public final void hideCursor() {
+    public final SwtWindowEngine hideCursor() {
         this.window.hideCursor();
+        return this;
     }
 
     @Override
@@ -174,7 +182,8 @@ public final class SwtWindowEngine implements BaseWindowEngine {
     }
 
     @Override
-    public final void registerInput(final WindowInputListener listener) {
+    public final SwtWindowEngine registerInput(final WindowInputListener listener) {
         this.canvas.registerInput(listener);
+        return this;
     }
 }
