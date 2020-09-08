@@ -389,8 +389,9 @@ public class SwtWindowShell extends BaseSwtWindowWidget<WindowShell> implements 
     }
 
     @Override
-    public void requestFocus() {
+    public SwtWindowShell requestFocus() {
         //FIXME implements
+        return this;
     }
 
     @Override

@@ -30,6 +30,8 @@ import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.input.MouseLeftClickListener;
+import be.yildizgames.module.window.input.MouseOverListener;
+import be.yildizgames.module.window.widget.WidgetEvent;
 import be.yildizgames.module.window.widget.WindowButton;
 import be.yildizgames.module.window.widget.WindowImageProvider;
 import org.eclipse.swt.SWT;
@@ -62,6 +64,16 @@ class SwtWindowButton extends BaseSwtWindowWidget<WindowButton> implements Windo
     }
 
     @Override
+    public WindowButton addOnMouseOverListener(MouseOverListener l) {
+        return null;
+    }
+
+    @Override
+    public WindowButton fireEvent(WidgetEvent event) {
+        return null;
+    }
+
+    @Override
     public WindowButton setCoordinates(Coordinates coordinates) {
         this.button.setBounds(SwtConverter.from(coordinates));
         return this;
@@ -74,8 +86,25 @@ class SwtWindowButton extends BaseSwtWindowWidget<WindowButton> implements Windo
     }
 
     @Override
+    public WindowButton requestFocus() {
+        return this;
+    }
+
+    @Override
+    public WindowButton setSize(int width, int height) {
+        this.button.setSize(width, height);
+        return this;
+    }
+
+    @Override
     public WindowButton setPosition(Position position) {
         this.button.setLocation(position.left, position.top);
+        return this;
+    }
+
+    @Override
+    public WindowButton setPosition(int left, int top) {
+        this.button.setLocation(left, top);
         return this;
     }
 

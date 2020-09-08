@@ -101,6 +101,11 @@ class SwtWindowText extends BaseSwtWindowWidget <WindowTextLine> implements Wind
     }
 
     @Override
+    public WindowTextLine requestFocus() {
+        return this;
+    }
+
+    @Override
     public final WindowTextLine setPosition(Position position) {
         this.label.setLocation(position.left, position.top);
         return this;

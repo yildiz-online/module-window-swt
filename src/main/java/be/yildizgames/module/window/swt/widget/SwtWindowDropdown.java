@@ -30,6 +30,7 @@ import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.widget.WindowDropdown;
+import be.yildizgames.module.window.widget.WindowWidgetChangeListener;
 import org.eclipse.swt.widgets.Combo;
 
 import java.util.Arrays;
@@ -56,6 +57,11 @@ class SwtWindowDropdown extends BaseSwtWindowWidget<WindowDropdown> implements W
     public final WindowDropdown setSize(Size size) {
         this.combo.setSize(size.width, size.height);
         return this;
+    }
+
+    @Override
+    public WindowDropdown requestFocus() {
+        return null;
     }
 
     @Override
@@ -93,5 +99,10 @@ class SwtWindowDropdown extends BaseSwtWindowWidget<WindowDropdown> implements W
     @Override
     public final int getSelectionIndex() {
         return this.combo.getSelectionIndex();
+    }
+
+    @Override
+    public WindowDropdown onChange(WindowWidgetChangeListener<Integer> windowWidgetChangeListener) {
+        return this;
     }
 }

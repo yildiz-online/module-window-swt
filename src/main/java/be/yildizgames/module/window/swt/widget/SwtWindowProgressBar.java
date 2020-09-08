@@ -70,6 +70,11 @@ class SwtWindowProgressBar extends BaseSwtWindowWidget<WindowProgressBar> implem
     }
 
     @Override
+    public WindowProgressBar requestFocus() {
+        return this;
+    }
+
+    @Override
     public final WindowProgressBar setPosition(Position position) {
         this.progressBar.setLocation(position.left, position.top);
         return this;

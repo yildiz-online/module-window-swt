@@ -89,6 +89,11 @@ class SwtWindowTextArea extends BaseSwtWindowWidget<WindowTextArea> implements W
     }
 
     @Override
+    public WindowTextArea requestFocus() {
+        return this;
+    }
+
+    @Override
     public final WindowTextArea setPosition(Position position) {
         this.textArea.setLocation(position.left, position.top);
         return this;

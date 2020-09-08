@@ -27,7 +27,7 @@ import be.yildizgames.module.coordinate.Coordinates;
 import be.yildizgames.module.coordinate.Position;
 import be.yildizgames.module.coordinate.Size;
 import be.yildizgames.module.window.widget.WindowInputBox;
-import be.yildizgames.module.window.widget.WindowInputBoxChangeListener;
+import be.yildizgames.module.window.widget.WindowWidgetChangeListener;
 import org.eclipse.swt.widgets.Text;
 
 /**
@@ -66,14 +66,19 @@ class SwtWindowInputBox extends BaseSwtWindowWidget<WindowInputBox> implements W
     }
 
     @Override
-    public WindowInputBox onChange(WindowInputBoxChangeListener l) {
-        this.input.addModifyListener(modifyEvent -> l.onChange());
+    public WindowInputBox onChange(WindowWidgetChangeListener<String> windowWidgetChangeListener) {
+        this.input.addModifyListener(modifyEvent -> windowWidgetChangeListener.changed(modifyEvent.data.toString()));
         return this;
     }
 
     @Override
     public final WindowInputBox setSize(Size size) {
         this.input.setSize(size.width, size.height);
+        return this;
+    }
+
+    @Override
+    public WindowInputBox requestFocus() {
         return this;
     }
 

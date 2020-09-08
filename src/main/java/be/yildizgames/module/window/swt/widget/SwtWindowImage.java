@@ -71,6 +71,11 @@ class SwtWindowImage extends BaseSwtWindowWidget<WindowImage> implements WindowI
     }
 
     @Override
+    public WindowImage requestFocus() {
+        return this;
+    }
+
+    @Override
     public final WindowImage setPosition(Position position) {
         this.container.setLocation(position.left, position.top);
         return this;
