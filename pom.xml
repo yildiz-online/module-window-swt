@@ -52,7 +52,7 @@
   </scm>
 
   <properties>
-    <dependency.swt.version>3.116.0</dependency.swt.version>
+    <dependency.swt.version>3.116.100</dependency.swt.version>
     <java.version>11</java.version>
   </properties>
 
